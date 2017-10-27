@@ -1,8 +1,14 @@
 package xyz.hitpy.seproject.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,5 +49,26 @@ public class SigninController {
         + username + "\", \"" + password + "\", " + gender + ", " + entryYear + "\"" + ps + "\");";
         sqlCon.executeUpdate(update);
         return "signin_success";
+    }
+    
+    @RequestMapping("/checks")//这里就是checks.do
+    public void logindeal(HttpServletRequest request, HttpServletResponse response)throws IOException{
+        PrintWriter out=response.getWriter();
+        String username=request.getParameter("username");
+        String password=request.getParameter("password");
+        //注意这里的request.getParameter("username")取的是data里面的那个json对象的username,而非<input>里面那个，同理password也一样。
+        JSONObject json=new JSONObject();
+        if(username.equals("admin")&&password.equals("admin")){//这里没有用数据库验证
+            json.put("result","success");
+        }else{
+            json.put("result","error");
+        }
+        out.print(json);
+        }
+    
+    @RequestMapping("/result")
+    public String result()
+    {
+        return "result";
     }
 }
