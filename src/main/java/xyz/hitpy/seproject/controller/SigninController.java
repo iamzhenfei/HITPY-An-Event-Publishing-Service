@@ -12,28 +12,31 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
 @Controller
 public class SigninController {
     @RequestMapping("/ifUserExist")
-    @ResponseBody
-    public Object ifUserExist( @RequestParam("username") String username)
+    public void ifUserExist(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
+        PrintWriter out = response.getWriter();
+        String username = request.getParameter("username");
         SqlCon sqlCon = new SqlCon();
-        String query = "select * from user where username = " + username + " limit 1;";
+        String query = "select * from user where username = \"" + username + "\" limit 1;";
+        JSONObject json=new JSONObject();
         ResultSet rs = sqlCon.executeQuery(query);
+        json.put("result", "0");
         try {
             while(rs.next())
             {
-                return 1;
+                json.put("result", "1");
+                break;
             }
         } catch (SQLException e) {
             System.out.println("error in methord 'ifUserExist' of class 'SigninController'");
             e.printStackTrace();
         }
-        return 0;
+        out.print(json);
     }
     
     @RequestMapping("/addUser")
@@ -42,29 +45,14 @@ public class SigninController {
     {
         SqlCon sqlCon = new  SqlCon();
         String update = "insert into user (username, password, gender, entryYear, ps) values (\""
-        + username + "\", \"" + password + "\", " + gender + ", " + entryYear + "\"" + ps + "\");";
+        + username + "\", \"" + password + "\", " + gender + ", " + entryYear + ", \"" + ps + "\");";
         sqlCon.executeUpdate(update);
         return "signup_success";
     }
     
-    @RequestMapping("/checks")//这里就是checks.do
-    public void logindeal(HttpServletRequest request, HttpServletResponse response)throws IOException{
-        PrintWriter out=response.getWriter();
-        String username=request.getParameter("username");
-        String password=request.getParameter("password");
-        //注意这里的request.getParameter("username")取的是data里面的那个json对象的username,而非<input>里面那个，同理password也一样。
-        JSONObject json=new JSONObject();
-        if(username.equals("admin")&&password.equals("admin")){//这里没有用数据库验证
-            json.put("result","success");
-        }else{
-            json.put("result","error");
-        }
-        out.print(json);
-        }
-    
-    @RequestMapping("/success")
-    public String result()
-    {
-        return "success";
-    }
+    /*
+     * 仅仅用来测试能不能跳转
+     */
+    @RequestMapping("/test_final_success")
+    public String result() { return "test_final_success"; }
 }
