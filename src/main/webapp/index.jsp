@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Test</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
                 data:{"username":$("#username").val(),"password":$("#password").val(),"charcode":$("#codes").val()},
                 success:function (data) {
                 if(data.result=="success"){
-                 window.location.href='result';
+                 window.location.href='success';
                    }else
                      alert("密码错误");
                 },
