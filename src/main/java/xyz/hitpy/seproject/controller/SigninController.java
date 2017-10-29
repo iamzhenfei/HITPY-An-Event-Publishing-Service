@@ -50,9 +50,6 @@ public class SigninController {
         return "signup_success";
     }
     
-    /*
-     * 仅仅用来测试能不能跳转
-     */
-    @RequestMapping("/test_final_success")
-    public String result() { return "test_final_success"; }
+    @RequestMapping("/signup")
+    public String result() { return "signup"; }
 }

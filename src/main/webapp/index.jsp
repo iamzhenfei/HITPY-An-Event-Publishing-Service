@@ -26,10 +26,10 @@
 				<div class="navbar-header">
 					<a class="navbar-brand">HIT_PY</a>
 					<ul class="nav navbar-nav navbar-right">
-						<li class="navbar-right"><a href="login.jsp">登录</a></li>
+						<li class="navbar-right"><a href="login">登录</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li class="navbar-right"><a href="signup.jsp">注册</a></li>
+						<li class="navbar-right"><a href="signup">注册</a></li>
 					</ul>
 				</div>
 			</div>
