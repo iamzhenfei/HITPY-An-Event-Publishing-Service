@@ -15,7 +15,7 @@ public class SqlCon {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bookdb","root","ls1150310202");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sedb","root","ls1150310202");
             stat=con.createStatement();
             
         }
