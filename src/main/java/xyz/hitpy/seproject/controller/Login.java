@@ -38,9 +38,9 @@ public class Login {
 		int autoLoginTimeout = -1;
 		SqlCon c = new SqlCon();
 		String pass = null;
-		ResultSet res = c.executeQuery("SELECT * FROM USER WHERE USERNAME = " + "\"" + username + "\"");
+		ResultSet res = c.executeQuery("SELECT * FROM sedb.user WHERE USERNAME = " + "\"" + username + "\"");
 		try {
-			if (res.first()) {
+			if (res != null && res.first()) {
 				pass = res.getString("password");
 			}
 		} catch (SQLException e) {
@@ -48,7 +48,7 @@ public class Login {
 			e.printStackTrace();
 		}
 		
-		if (password != null && username != null && pass.equals(password)) {
+		if (password != null && username != null && pass != null && pass.equals(password)) {
 			autoLoginTimeout = Integer.MAX_VALUE;
 			vali = true;
 		}
