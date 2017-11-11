@@ -5,8 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script language="javascript" type="text/javascript"> 
+	sleep(2000);
+	window.location.href="index"
+</script>
+
 </head>
 <body>
-哈哈哈哈注册成功哒
+注册成功
 </body>
 </html>

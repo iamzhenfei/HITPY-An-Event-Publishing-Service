@@ -17,11 +17,20 @@ import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
 @Controller
 public class Login {
-		
+	@RequestMapping(value = "")
+	public String indexPage(ModelMap model) {
+		model.addAttribute("username", "");
+		return "index";
+	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(ModelMap model) {
 		model.addAttribute("error", "");
 		return "login";
+	}
+	@RequestMapping(value = "/create_activity", method = RequestMethod.GET)
+	public String postPage(ModelMap model) {
+		return "create_activity";
+
 	}
 	
 	/**

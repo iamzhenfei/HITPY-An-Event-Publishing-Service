@@ -84,8 +84,9 @@
 			</div>
 		</div>
 	
-		<p>
-			<input type="submit" value="登录">
+		<p style="padding: 20px 100px 10px;" >
+			<input type="submit" value="登录" class="btn btn-primary btn-lg" style="width:40%;position:relative;left:30%;">
+
 		</p>
 	</form>
 </body>
