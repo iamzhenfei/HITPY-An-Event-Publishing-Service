@@ -33,7 +33,7 @@ body {
 
 	function load(){
 		
-		$("<h1 style=\"color=#66ccff\">你好</h1>").prependTo($("#forum"));
+		$("<h1 style=\"color=#66ccff\">？？？</h1>").prependTo($("#forum"));
 		
 		var user = "${username}";
 		
@@ -45,6 +45,7 @@ body {
 			document.getElementById("sign").style.visibility="visible";
 			document.getElementById("logout").style.visibility="hidden";
 			document.getElementById("username").style.visibility="hidden";
+			document.getElementById("postButton").style.visibility="hidden";
 	    }
 	    else
 	    {
@@ -52,6 +53,7 @@ body {
 			document.getElementById("sign").style.visibility="hidden";
 			document.getElementById("logout").style.visibility="visible";
 			document.getElementById("username").style.visibility="visible";
+			document.getElementById("postButton").style.visibility="visible";
 	    }
 		
 	}
@@ -88,7 +90,7 @@ body {
 		<div class="container">
 			<h1 style="color=#66ccff">别注册了</h1>
 			<p>
-				<button class="btn btn-primary btn-lg" onclick="onclickname()">你要不要考虑发个帖子</button>
+				<button class="btn btn-primary btn-lg" onclick="onclickname()" id="postButton">你要不要考虑发个帖子</button>
 			</p>
 		</div>
 		
