@@ -30,11 +30,7 @@
             success:function (data) {
 	            if(data.result=="1")
 	            {
-	            	alert("这个用户名不行");
-	            }
-	            else
-	            {
-	                 alert("用户名可以用啊");
+	            		alert("这个用户名不行");
 	            }
             },
             error:function () {

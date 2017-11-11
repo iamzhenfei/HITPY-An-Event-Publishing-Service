@@ -100,6 +100,6 @@ public class Login {
 	    response.addCookie(passwordCookie);    
 	    request.getSession().removeAttribute("username");  
 	    request.getSession().removeAttribute("password");  
-	    return "redirect:xxx";  
+	    return "redirect:";
 	}  
 }
