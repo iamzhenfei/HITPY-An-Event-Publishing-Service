@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
 @Controller
-public class SigninController {
+public class SignupController {
     @RequestMapping("/ifUserExist")
     public void ifUserExist(HttpServletRequest request, HttpServletResponse response) throws IOException
     {

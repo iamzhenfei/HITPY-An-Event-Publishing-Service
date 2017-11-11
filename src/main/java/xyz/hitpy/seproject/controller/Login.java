@@ -27,11 +27,6 @@ public class Login {
 		model.addAttribute("error", "");
 		return "login";
 	}
-	@RequestMapping(value = "/create_activity", method = RequestMethod.GET)
-	public String postPage(ModelMap model) {
-		return "create_activity";
-
-	}
 	
 	/**
      * @RequestParam 
@@ -54,7 +49,6 @@ public class Login {
 				pass = res.getString("password");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -78,11 +72,10 @@ public class Login {
 			    response.addCookie(passwordCookie);  
 			}
 			return "index";
-		}  
+		}
 		else
 			model.addAttribute("error", "用户名错误或密码不存在");
 			return "login";
-		
 	}
 	
 	@RequestMapping("/logout")  

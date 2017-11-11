@@ -5,7 +5,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Signup - Bootstrap Admin Template</title>
+<title>Signup</title>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -59,6 +59,7 @@
 							placeholder="用户名" class="form-control" onblur="checkusername()" />
 					</div>
 					<br />
+
 
 					<div class="input-group-addon">
 						<input type="password" id="password" name="password" value=""
