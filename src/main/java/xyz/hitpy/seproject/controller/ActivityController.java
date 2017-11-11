@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ActivityController {
-    @RequestMapping("createActivity")
+    @RequestMapping("create_activity")
     public String createActivityPage() { return "create_activity"; }
     
     public String addActivity(@RequestParam("title") String title, @RequestParam("content") String content,

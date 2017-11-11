@@ -14,7 +14,6 @@
 
 <mvc:annotation-driven />
 <mvc:resources location="/resources/" mapping="/resources/**" />
-<mvc:resources mapping="/ueditor/**" location="/ueditor/" />
 <context:component-scan base-package="xyz.hitpy.seproject.controller" />
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
