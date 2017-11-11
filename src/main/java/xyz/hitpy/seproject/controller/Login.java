@@ -30,6 +30,7 @@ public class Login {
 	@RequestMapping(value = "/create_activity", method = RequestMethod.GET)
 	public String postPage(ModelMap model) {
 		return "create_activity";
+
 	}
 	
 	/**
