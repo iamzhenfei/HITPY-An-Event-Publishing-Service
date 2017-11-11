@@ -32,9 +32,10 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>login</title>
-<script src="resources/bootstrap/js/jquery.js"></script>
-<script src="resources/bootstrap/js/bootstrap.min.js"></script>
-<link href="resources//bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="resources/jquery.js"></script>
+<link href="resources/bootstrap.min.js" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 	<form action="loginnow" method="post">
