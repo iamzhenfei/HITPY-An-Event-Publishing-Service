@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import xyz.hitpy.seproject.model.ActivityPreview;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
 @Controller
@@ -20,13 +21,13 @@ public class IndexController {
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("username"); 
 		model.addAttribute("username", username);
-		ArrayList<activityPreview> activities = new ArrayList<activityPreview>();
+		ArrayList<ActivityPreview> activities = new ArrayList<ActivityPreview>();
 		SqlCon con = new SqlCon();
 		String query = "SELECT * FROM sedb.activity";
 		ResultSet res = con.executeQuery(query);
 		try {
 			while (res.next()) {
-				activities.add(new activityPreview(res.getInt("aid"), res.getString("name"), 
+				activities.add(new ActivityPreview(res.getInt("aid"), res.getString("name"), 
 						res.getString("time"), res.getString("location"), res.getString("username")));
 			}
 		} catch (SQLException e) {
@@ -38,7 +39,9 @@ public class IndexController {
 	}
 }
 
-class activityPreview {
+/*
+ * class activityPreview {
+ 
 	private int aid;
 	private String name;
 	private String time;
@@ -89,3 +92,4 @@ class activityPreview {
 		this.username = username;
 	}
 }
+*/
