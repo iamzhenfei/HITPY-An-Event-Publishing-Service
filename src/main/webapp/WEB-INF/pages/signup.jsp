@@ -5,19 +5,16 @@
 
 <head>
 <meta charset="utf-8">
-<title>Signup - Bootstrap Admin Template</title>
+<title>Signup</title>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
-<link href="resources/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
 
 <link href="resources/font-awesome.css" rel="stylesheet">
-<script src = "resources/jquery.js"></script>
+<script src="resources/bootstrap/js/jquery.js"></script>
+<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+<link href="resources//bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
 <script type="text/javascript">
     function checkusername(){
         $.ajax({
@@ -45,7 +42,6 @@
 </head>
 
 <body>
-	<meta charset="utf-8">
 	<div class="account-container register">
 		<div class="content clearfix">
 			<form action="addUser" method="post">
@@ -57,25 +53,25 @@
 						<input type="text"
 							id="username" name="username" value="" placeholder="用户名"
 							class="form-control" onblur="checkusername()"/>
-					</div> </br>
+					</div> <br/>
 
 					<div class="input-group-addon">
 						<input type="password"
 							id="password" name="password" value="" placeholder="密码"
-							class="form-control"" />
-					</div> </br>
+							class="form-control" />
+					</div> <br/>
 
 					<div class="input-group-addon">
 						<input type="text"
 							id="gender" name="gender" value="" placeholder="性别"
 							class="form-control" />
-					</div> </br>
+					</div> <br/>
 
 					<div class="input-group-addon">
 						<input type="text"
 							id="entryYear" name="entryYear" value="" placeholder="入学年份"
 							class="form-control" />
-					</div> </br>
+					</div> <br/>
 					<!-- /field -->
 
 					<div class="input-group-addon">

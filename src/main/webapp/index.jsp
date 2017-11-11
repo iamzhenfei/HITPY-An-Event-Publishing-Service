@@ -9,16 +9,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>HIT_PY</title>
-<link href="./resources/bootstrap.min.js" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="resources/bootstrap/js/jquery.js"></script>
+<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+<link href="resources//bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
 </head>
-
-<script> 
-	function onclickname(){
-		console.log("Hello World");
-	}
-</script>
-
 <body>
 	<nav class="navbar navbar-inverse" role="navigation">
 		<div class="navbar-header">
@@ -39,31 +35,11 @@
 		<div class="container">
 			<h1>别注册了</h1>
 			<p>
-				<button class="btn btn-primary btn-lg" onclick="onclickname()">Money
-					Talks</button>
+			    <a href = "createActivity">
+				<button class="btn btn-primary btn-lg">发布活动</button>
+				</a>
 			</p>
 		</div>
-	</div>
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<p>
-					<button class="btn btn-default" onclick="onclickname()">Maps</button>
-				</p>
-			</div>
-			<div class="col-md-4">
-				<p>
-					<button class="btn btn-default" onclick="onclickname()">Can</button>
-				</p>
-			</div>
-			<div class="col-md-4">
-				<p>
-					<button class="btn btn-default" onclick="onclickname()">Talk</button>
-				</p>
-			</div>
-		</div>
-		<hr>
 	</div>
 
 </body>
