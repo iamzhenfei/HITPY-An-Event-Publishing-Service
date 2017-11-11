@@ -41,7 +41,7 @@ public class ActivityController {
         // 通过cookie验证了
         uid++;  // 用户发帖数加1
         String upd = "insert into sedb.activity(name, time, location, content, username, uid) values(\"" + eventName +
-                "\",\"" + eventTime + "\",\"" + eventLocation + "\", \"" + content + "\", \"" + username +
+                "\",\"" + eventTime + "\",\"" + eventLocation + "\", \"" + HtmlCoder.encode(content) + "\", \"" + username +
                 "\"," + uid + ");";
         c.executeUpdate(upd);
         upd = "update sedb.user set uid = " + uid + " where username = \"" + username + "\";";
@@ -88,10 +88,37 @@ public class ActivityController {
         model.addAttribute("eventName", eventName);
         model.addAttribute("eventTime", eventTime);
         model.addAttribute("eventLocation", eventLocation);
-        model.addAttribute("content", content);
+        model.addAttribute("content", HtmlCoder.decode(content));
         model.addAttribute("poster", poster);
         model.addAttribute("created", created);
         model.addAttribute("username", username);
         return "show_activity";
+    }
+}
+
+class HtmlCoder
+{
+    public static String encode(String str)
+    {
+        str = str.replaceAll("'", "''");
+        str = str.replaceAll("\"", "&quot;");
+        str = str.replaceAll("<", "&lt;");
+        str = str.replaceAll(">", "&gt;");
+        str = str.replaceAll("\n", "<br>");
+        str = str.replaceAll("“", "&ldquo;");
+        str = str.replaceAll("”", "&rdquo;");
+        return str;
+    }
+
+    public static String decode(String str)
+    {
+        str = str.replaceAll("&rdquo;", "”");
+        str = str.replaceAll("&ldquo;", "“");
+        str = str.replaceAll("<br>", "\n");
+        str = str.replaceAll("&gt;", ">");
+        str = str.replaceAll("&lt;", "<");
+        str = str.replaceAll("&quot;", "\"");
+        str = str.replaceAll("''", "'");
+        return str;
     }
 }
