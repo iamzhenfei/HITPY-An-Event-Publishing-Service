@@ -70,13 +70,13 @@ window.onload = function(){
 			<input type="text" id="eventLocation" name="eventLocation" value=""
 				placeholder="活动地点" class="form-control" />
 		</div>
-		<br/>
+		<br />
 
 		<div class="input-group-addon">
 			<input type="text" id="eventTime" name="eventTime" value=""
 				placeholder="活动时间" class="form-control" />
 		</div>
-		<br/>
+		<br />
 
 		<div class="adjoined-bottom">
 			<div class="grid-container">
