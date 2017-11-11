@@ -3,8 +3,10 @@ package xyz.hitpy.seproject.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import xyz.hitpy.seproject.mysqlcon.SqlCon;
+import org.springframework.stereotype.Service;
 
+import xyz.hitpy.seproject.mysqlcon.SqlCon;
+@Service
 public class LoginService {
 	public static boolean validating(String username, String password) {
 		boolean vali = false;
