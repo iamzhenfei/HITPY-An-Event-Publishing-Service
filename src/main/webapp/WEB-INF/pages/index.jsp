@@ -20,6 +20,7 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 }
+p.sansserif{font-family:KaiTi}
 </style>
 
 <link href="./resources/bootstrap.min.js" />
@@ -90,22 +91,22 @@ body {
 		style="opacity: 1; background-color: rgb(0, 0, 0);">
 		<div class="container">
 			<h1 style="">别注册了</h1>
-			<p>
+			<p style="padding: 20px 100px 10px">
 				<button class="btn btn-primary btn-lg" onclick="onclickname()"
-					id="postButton">你要不要考虑发个帖子</button>
+					id="postButton" >你要不要考虑发个帖子</button>
 			</p>
 		</div>
 
 		<div id="forum"></div>
 
 		
-		<div class="bs-docs-example">
+		<div class="bs-docs-example" style="padding: 20px 100px 10px;">
             <table class="table">
               <tbody>
               	<c:forEach items="${activitylist}" var="p">
 	                <tr>
 	                  <td>
-	                  	<a href="showActivity?aid=${p.aid}">${p.name}</a>
+	                  	<p> <a href="showActivity?aid=${p.aid}" style="text-align:center">${p.name}</a> </p>
 	                  </td>
 	                </tr>
 	            </c:forEach>
