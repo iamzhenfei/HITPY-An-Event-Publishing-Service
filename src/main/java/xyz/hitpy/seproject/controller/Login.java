@@ -79,8 +79,9 @@ public class Login {
 	    response.addCookie(userNameCookie);  
 	    response.addCookie(passwordCookie);    
 	    request.getSession().removeAttribute("username");  
+
 	    request.getSession().removeAttribute("password"); 
 	    model.addAttribute("username","");
-	    return "index";  
+	    return "index";
 	}  
 }
