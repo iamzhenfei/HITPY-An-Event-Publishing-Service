@@ -9,12 +9,17 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link href="resources/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css" />
 
 <link href="resources/font-awesome.css" rel="stylesheet">
-<script src="resources/bootstrap/js/jquery.js"></script>
-<script src="resources/bootstrap/js/bootstrap.min.js"></script>
-<link href="resources//bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
+<script src="resources/jquery.js"></script>
 <script type="text/javascript">
     function checkusername(){
         $.ajax({
@@ -50,46 +55,41 @@
 					<p>Create your free account:</p>
 
 					<div class="input-group-addon">
-						<input type="text"
-							id="username" name="username" value="" placeholder="用户名"
-							class="form-control" onblur="checkusername()"/>
-					</div> <br/>
+						<input type="text" id="username" name="username" value=""
+							placeholder="用户名" class="form-control" onblur="checkusername()" />
+					</div>
+					<br />
+
 
 					<div class="input-group-addon">
-						<input type="password"
-							id="password" name="password" value="" placeholder="密码"
-							class="form-control" />
-					</div> <br/>
+						<input type="password" id="password" name="password" value=""
+							placeholder="密码" class="form-control" />
+					</div>
+					<br />
 
 					<div class="input-group-addon">
-						<input type="text"
-							id="gender" name="gender" value="" placeholder="性别"
-							class="form-control" />
-					</div> <br/>
+						<input type="text" id="gender" name="gender" value=""
+							placeholder="性别" class="form-control" />
+					</div>
+					<br />
 
 					<div class="input-group-addon">
-						<input type="text"
-							id="entryYear" name="entryYear" value="" placeholder="入学年份"
-							class="form-control" />
-					</div> <br/>
+						<input type="text" id="entryYear" name="entryYear" value=""
+							placeholder="入学年份" class="form-control" />
+					</div>
+					<br />
 					<!-- /field -->
 
 					<div class="input-group-addon">
-						<input
-							type="text" id="ps" name="ps"
-							value="" placeholder="个人简介" class="form-control" />
+						<input type="text" id="ps" name="ps" value="" placeholder="个人简介"
+							class="form-control" />
 					</div>
 				</div>
-					<button class="button btn btn-primary btn-large" id="btn">Register</button>
+				<button id="btn" class="btn btn-primary btn-lg"
+					style="width: 40%; position: relative; left: 30%;">Register</button>
 			</form>
 		</div>
 	</div>
-
-	<div class="login-extra">
-		Already have an account? <a href="login.jsp">Login to your
-			account</a>
-	</div>
-
 </body>
 
 </html>
