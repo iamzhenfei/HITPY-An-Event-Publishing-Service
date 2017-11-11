@@ -60,23 +60,22 @@ public class Login {
 			model.addAttribute("username", username);
 			request.getSession().setAttribute("username", username);
 			request.getSession().setAttribute("password", password);
+			if(autoLoginTimeout > 0){  
+			    //自动登录cookie  
+			    Cookie userNameCookie = new Cookie("loginUserName", username);  
+			    Cookie passwordCookie = new Cookie("loginPassword", password);  
+			    userNameCookie.setMaxAge(autoLoginTimeout);  
+			    userNameCookie.setPath("/");  
+			    passwordCookie.setMaxAge(autoLoginTimeout);  
+			    passwordCookie.setPath("/");  
+			    response.addCookie(userNameCookie);  
+			    response.addCookie(passwordCookie);  
+			}
 			return "index";
-		}
-		if(autoLoginTimeout > 0){  
-		    //自动登录cookie  
-		    Cookie userNameCookie = new Cookie("loginUserName", username);  
-		    Cookie passwordCookie = new Cookie("loginPassword", password);  
-		    userNameCookie.setMaxAge(autoLoginTimeout);  
-		    userNameCookie.setPath("/");  
-		    passwordCookie.setMaxAge(autoLoginTimeout);  
-		    passwordCookie.setPath("/");  
-		    response.addCookie(userNameCookie);  
-		    response.addCookie(passwordCookie);  
 		}
 		else
 			model.addAttribute("error", "用户名错误或密码不存在");
 			return "login";
-		
 	}
 	
 	@RequestMapping("/logout")  
@@ -93,7 +92,8 @@ public class Login {
 	    response.addCookie(userNameCookie);  
 	    response.addCookie(passwordCookie);    
 	    request.getSession().removeAttribute("username");  
-	    request.getSession().removeAttribute("password");  
-	    return "redirect:xxx";  
+	    request.getSession().removeAttribute("password"); 
+	    model.addAttribute("username","");
+	    return "index";  
 	}  
 }
