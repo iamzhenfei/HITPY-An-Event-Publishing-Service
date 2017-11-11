@@ -19,7 +19,6 @@
 <link
 	href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
 	rel="stylesheet">
-<link href="index.css" rel="stylesheet">
 <script type="text/javascript" src="resources/jquery.js"> </script>
 <script type="text/javascript" src="resources/ckeditor/ckeditor.js"> </script>
 <script>
