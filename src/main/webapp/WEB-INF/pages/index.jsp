@@ -27,28 +27,37 @@ body {
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
+<script src="resources/jquery.js"></script>
+
 <script> 
+
 	function load(){
+		
+		$("<h1 style=\"color=#66ccff\">你好</h1>").prependTo($("#forum"));
+		
 		var user = "${username}";
 		
 		console.log(user);
-		
 		
 		if (user == "")
 	    {	
 			document.getElementById("login").style.visibility="visible";
 			document.getElementById("sign").style.visibility="visible";
+			document.getElementById("logout").style.visibility="hidden";
+			document.getElementById("username").style.visibility="hidden";
 	    }
 	    else
 	    {
-	    	document.getElementById("login").style.visibility="hidden";
+	    		document.getElementById("login").style.visibility="hidden";
 			document.getElementById("sign").style.visibility="hidden";
+			document.getElementById("logout").style.visibility="visible";
+			document.getElementById("username").style.visibility="visible";
 	    }
 		
 	}
 	
 	function onclickname(){
-		window.location.href="create_activity"; 
+		window.location.href="create_activity";
 	}
 </script>
 
@@ -65,8 +74,11 @@ body {
 					<ul class="nav navbar-nav navbar-right" id="sign">
 						<li class="navbar-right"><a href="signup">注册</a></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right" id="username">
 						<li class="navbar-right">${username}</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right" id="logout">
+						<li class="navbar-right"><a href="logout">退出</a></li>
 					</ul>
 				</div>
 			</div>
@@ -76,32 +88,17 @@ body {
 		<div class="container">
 			<h1 style="color=#66ccff">别注册了</h1>
 			<p>
-				<button class="btn btn-primary btn-lg" onclick="onclickname()">Money
-					Talks</button>
+				<button class="btn btn-primary btn-lg" onclick="onclickname()">你要不要考虑发个帖子</button>
 			</p>
 		</div>
-	</div>
-	<!-- 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<p>
-					<button class="btn btn-default" onclick="onclickname()">Maps</button>
-				</p>
-			</div>
-			<div class="col-md-4">
-				<p>
-					<button class="btn btn-default" onclick="onclickname()">Can</button>
-				</p>
-			</div>
-			<div class="col-md-4">
-				<p>
-					<button class="btn btn-default" onclick="onclickname()">Talk</button>
-				</p>
-			</div>
+		
+		<div id="forum">
+		
 		</div>
-		<hr>
+		
 	</div>
-	 -->
+	
+	
+	
 </body>
 </html>

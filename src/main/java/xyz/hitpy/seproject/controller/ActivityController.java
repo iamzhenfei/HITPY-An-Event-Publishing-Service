@@ -51,4 +51,8 @@ public class ActivityController {
         c.executeUpdate(upd);
         return "create_a_success";
     }
+    @RequestMapping("query_activity")
+    public void queryActivity(HttpServletRequest request, HttpServletResponse response) {
+    		
+    }
 }
