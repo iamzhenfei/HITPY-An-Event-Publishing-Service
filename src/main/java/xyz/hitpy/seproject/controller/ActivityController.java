@@ -18,4 +18,8 @@ public class ActivityController {
         
         return "show_activity";
     }
+    @RequestMapping("query_activity")
+    public void queryActivity(HttpServletRequest request, HttpServletResponse response) {
+    		
+    }
 }

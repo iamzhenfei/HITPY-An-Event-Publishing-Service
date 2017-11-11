@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
+import xyz.hitpy.seproject.service.LoginService;
 
 @Controller
 public class Login {
@@ -39,24 +40,10 @@ public class Login {
 	public String login(@RequestParam("username") String username, 
 			@RequestParam("password") String password, ModelMap model,
 			HttpServletResponse response,HttpServletRequest request) {
-		boolean vali = false;
 		int autoLoginTimeout = -1;
-		SqlCon c = new SqlCon();
-		String pass = null;
-		ResultSet res = c.executeQuery("SELECT * FROM sedb.user WHERE USERNAME = " + "\"" + username + "\"");
-		try {
-			if (res != null && res.first()) {
-				pass = res.getString("password");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
-		if (password != null && username != null && pass != null && pass.equals(password)) {
+		if (LoginService.validating(username, password)) {
 			autoLoginTimeout = Integer.MAX_VALUE;
-			vali = true;
-		}
-		if (vali) {
 			model.addAttribute("username", username);
 			request.getSession().setAttribute("username", username);
 			request.getSession().setAttribute("password", password);
