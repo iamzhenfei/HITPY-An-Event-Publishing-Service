@@ -33,21 +33,6 @@ body {
 
 	function load(){
 		
-		$.ajax({
-            type:"post",
-            url:"query_activity",
-            dataType:"json",    //data传递的是一个json类型的值，而不是字符串，且必须标明dataType的类型，否则会出现400错误或者其他错误。
-            success:function () {
-	            if(data.result=="1")
-	            {
-	            		alert("这个用户名不行");
-	            }
-            },
-            error:function () {
-                alert("网络错误");
-            }
-	   	});
-		
 		$("<h1 style=\"color=#66ccff\">你好</h1>").prependTo($("#forum"));
 		
 		var user = "${username}";
