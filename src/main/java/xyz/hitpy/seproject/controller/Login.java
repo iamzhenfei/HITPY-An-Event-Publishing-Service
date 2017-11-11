@@ -68,7 +68,7 @@ public class Login {
 		    passwordCookie.setPath("/");  
 		    response.addCookie(userNameCookie);  
 		    response.addCookie(passwordCookie);  
-		}  
+		}
 		else
 			model.addAttribute("error", "用户名错误或密码不存在");
 			return "login";

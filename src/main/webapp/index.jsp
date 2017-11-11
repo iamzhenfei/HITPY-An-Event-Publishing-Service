@@ -37,8 +37,7 @@
 			<p>
 			    <a href = "createActivity">
 				<button class="btn btn-primary btn-lg">发布活动</button>
-				</a>
-			</p>
+				</a>			</p>
 		</div>
 	</div>
 
