@@ -5,7 +5,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Signup - Bootstrap Admin Template</title>
+<title>Signup</title>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -30,11 +30,7 @@
             success:function (data) {
 	            if(data.result=="1")
 	            {
-	            	alert("这个用户名不行");
-	            }
-	            else
-	            {
-	                 alert("用户名可以用啊");
+	            		alert("这个用户名不行");
 	            }
             },
             error:function () {
@@ -59,6 +55,7 @@
 							placeholder="用户名" class="form-control" onblur="checkusername()" />
 					</div>
 					<br />
+
 
 					<div class="input-group-addon">
 						<input type="password" id="password" name="password" value=""
