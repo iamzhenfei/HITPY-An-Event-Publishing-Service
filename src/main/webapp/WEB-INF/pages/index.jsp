@@ -99,7 +99,6 @@ p.sansserif{font-family:KaiTi}
 
 		<div id="forum"></div>
 
-		
 		<div class="bs-docs-example" style="padding: 20px 100px 10px;">
             <table class="table">
               <tbody>
