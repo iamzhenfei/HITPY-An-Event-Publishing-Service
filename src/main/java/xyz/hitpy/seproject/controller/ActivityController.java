@@ -1,6 +1,5 @@
 package xyz.hitpy.seproject.controller;
 
-import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -8,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -115,9 +112,11 @@ public class ActivityController {
         return "show_activity";
     }
     
-    @RequestMapping("joinActivity")
+    @RequestMapping(value = "joinActivity")
     public void joinActivity(HttpServletResponse response, HttpServletRequest request) throws IOException
     {
+        response.setCharacterEncoding("UTF-8");  
+        response.setContentType("text/html;charset=UTF-8");  
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String aidStr = request.getParameter("aid");
