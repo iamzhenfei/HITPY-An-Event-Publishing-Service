@@ -20,10 +20,6 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 }
-
-p.sansserif {
-	font-family: KaiTi
-}
 </style>
 
 <link href="./resources/bootstrap.min.js" />
@@ -81,8 +77,7 @@ p.sansserif {
 						<li class="navbar-right"><a href="signup">注册</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right" id="username">
-						<li class="navbar-right"><a style="text-align: center">
-								${username} </a></li>
+						<li class="navbar-right"> <a style="text-align:center"> ${username} </a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right" id="logout">
 						<li class="navbar-right"><a href="logout">退出</a></li>
@@ -95,7 +90,7 @@ p.sansserif {
 		style="opacity: 1; background-color: rgb(0, 0, 0);">
 		<div class="container">
 			<h1 style="">别注册了</h1>
-			<p style="padding: 20px 100px 10px">
+			<p>
 				<button class="btn btn-primary btn-lg" onclick="onclickname()"
 					id="postButton">你要不要考虑发个帖子</button>
 			</p>
@@ -103,22 +98,24 @@ p.sansserif {
 
 		<div id="forum"></div>
 
-		<div class="bs-docs-example" style="padding: 20px 100px 10px;">
-			<table class="table">
-				<tbody>
-					<c:forEach items="${activitylist}" var="p">
-						<tr>
-							<td>
-								<p>
-									<a href="showActivity?aid=${p.aid}" style="text-align: center">${p.name}</a>
-								</p>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+		
+		<div class="bs-docs-example">
+            <table class="table">
+              <tbody>
+              	<c:forEach items="${activitylist}" var="p">
+	                <tr>
+	                  <td>
+	                  	<a href="showActivity?aid=${p.aid}">${p.name}</a>
+	                  </td>
+	                </tr>
+	            </c:forEach>
+              </tbody>
+            </table>
+          </div>
+
 	</div>
+
+
 
 </body>
 </html>
