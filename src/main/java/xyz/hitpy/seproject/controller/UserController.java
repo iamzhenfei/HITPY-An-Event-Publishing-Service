@@ -42,28 +42,28 @@ public class UserController {
             e.printStackTrace();
         }
         // 根据aid取活动名称
-        List<String> aids =  Arrays.asList((activity.split(" ")));
-        List<String> activities = new ArrayList<String>();
-        Iterator<String> it = aids.iterator();
-        if(it.hasNext())
+        ArrayList<ActivityPreview> activities = new ArrayList<ActivityPreview>();
+        if (!activity.equals(""))
         {
-        	    it.next();
-        }
-        while(it.hasNext())
-        {
-            query = "SELECT name FROM sedb.activity where aid=" + it.next() +" limit 1";
-            res = con.executeQuery(query);
-            try {
-                while(res.next())
-                {
-                    activities.add(res.getString("name"));
+            List<String> aids =  Arrays.asList((activity.split(" ")));
+            aids = aids.subList(1, aids.size());
+            Iterator<String> it = aids.iterator();
+            while(it.hasNext())
+            {
+                query = "SELECT * FROM sedb.activity where aid=" + it.next() +" limit 1";
+                res = con.executeQuery(query);
+                try {
+                    while(res.next())
+                    {
+                        activities.add(new ActivityPreview(res.getInt("aid"), res.getString("name"), 
+                                res.getString("time"), res.getString("location"), res.getString("username")));
+                    }
+                } catch (SQLException e) {
+                    System.out.println("error at 62 in showProfile of userController");
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                System.out.println("error at 58 in showProfile of userController");
-                e.printStackTrace();
             }
         }
-        
         model.addAttribute("username", username);
         model.addAttribute("entryYear", entryYear);
         model.addAttribute("ps", ps);
