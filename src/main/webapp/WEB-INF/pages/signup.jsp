@@ -39,53 +39,54 @@
 	   	});
     }
 </script>
-
+<style>
+body {
+    background-image:
+        url("http://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/8930/80c102d6a56b1fc2a6a01c5586a88d7d1b42cbd1.jpg");
+    background-repeat: no-repeat; /* 不平铺。图片只展示一次。 */
+    background-size: contain;
+    background-size: cover;
+    background-attachment: fixed;
+}
+</style>
 </head>
 
 <body>
-	<div class="account-container register">
-		<div class="content clearfix">
-			<form action="addUser" method="post">
-				<h1>Signup for Free Account</h1>
-				<div class="login-fields" style="padding: 10px 200px 10px;">
-					<p>Create your free account:</p>
+	<form action="addUser" method="post">
+        <div style="width: 400px;height: 500px;padding: 10px 50px;
+        margin-top: 100px;margin-left: auto;margin-right: auto;
+        border-style: solid;border-width:thin;background: rgba(255,255,255, 0.2);">
+        
+		<div class="login-fields">
+			<div class="input-group" style="width: 300px;margin: 40px 0px;">
+				<input type="text" id="username" name="username" value=""
+					placeholder="用户名" class="form-control" onblur="checkusername()" />
+			</div>
 
-					<div class="input-group-addon">
-						<input type="text" id="username" name="username" value=""
-							placeholder="用户名" class="form-control" onblur="checkusername()" />
-					</div>
-					<br />
+			<div class="input-group" style="width: 300px;margin: 40px 0px;">
+				<input type="password" id="password" name="password" value=""
+					placeholder="密码" class="form-control" />
+			</div>
 
+			<div class="input-group" style="width: 300px;margin: 40px 0px;">
+				<input type="text" id="gender" name="gender" value=""
+					placeholder="性别" class="form-control" />
+			</div>
 
-					<div class="input-group-addon">
-						<input type="password" id="password" name="password" value=""
-							placeholder="密码" class="form-control" />
-					</div>
-					<br />
+			<div class="input-group" style="width: 300px;margin: 40px 0px;">
+				<input type="text" id="entryYear" name="entryYear" value=""
+					placeholder="入学年份" class="form-control" />
+			</div>
 
-					<div class="input-group-addon">
-						<input type="text" id="gender" name="gender" value=""
-							placeholder="性别" class="form-control" />
-					</div>
-					<br />
-
-					<div class="input-group-addon">
-						<input type="text" id="entryYear" name="entryYear" value=""
-							placeholder="入学年份" class="form-control" />
-					</div>
-					<br />
-					<!-- /field -->
-
-					<div class="input-group-addon">
-						<input type="text" id="ps" name="ps" value="" placeholder="个人简介"
-							class="form-control" />
-					</div>
-				</div>
-				<button id="btn" class="btn btn-primary btn-lg"
-					style="width: 40%; position: relative; left: 30%;">Register</button>
-			</form>
+			<div class="input-group" style="width: 300px;margin: 40px 0px;">
+				<input type="text" id="ps" name="ps" value="" placeholder="个人简介"
+					class="form-control" />
+			</div>
 		</div>
-	</div>
+		<button id="btn" class="btn btn-primary btn-lg"
+			style="width: 300px;">注册</button>
+		</div>
+	</form>
 </body>
 
 </html>
