@@ -1,13 +1,19 @@
 package xyz.hitpy.seproject.controller;
 
+import java.awt.List;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
@@ -33,10 +39,9 @@ public class ActivityController {
 				eventTime = new String(eventTime.getBytes("ISO-8859-1"),"UTF-8");
 				content = new String(content.getBytes("ISO-8859-1"),"UTF-8");
 			} catch (UnsupportedEncodingException e1) {
-				// TODO Auto-generated catch block
+				System.out.println("error at getBytes in addActivity of ActivityController");
 				e1.printStackTrace();
 			}
-    		System.out.println(eventName);
         String username = (String) request.getSession().getAttribute("username");
         if (username == null || username.equals("")) { return "redirect:login"; }
         SqlCon c = new SqlCon();
@@ -78,7 +83,8 @@ public class ActivityController {
     public String showActivity(@RequestParam("aid") int aid, ModelMap model, HttpServletResponse response,HttpServletRequest request)
     {
         SqlCon c = new SqlCon();
-        String eventName = null, eventTime = null, eventLocation = null, content = null, poster = null, created = null;
+        String eventName = null, eventTime = null, eventLocation = null,
+                content = null, poster = null, partyStr = null;
         Timestamp created_ts = null;
         ResultSet res = c.executeQuery("select * from sedb.activity where aid=" + aid + " limit 0, 1");
         try {
@@ -89,22 +95,68 @@ public class ActivityController {
                 content = res.getString("content");
                 poster = res.getString("username");
                 created_ts = res.getTimestamp("created");
+                partyStr = res.getString("party");
             }
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("error at 73 of addActivity in ActivityController.java");
         }
         if (created_ts == null) { return "404"; }
-        created = created_ts.toString();
         String username = (String) request.getSession().getAttribute("username");
         model.addAttribute("eventName", eventName);
         model.addAttribute("eventTime", eventTime);
         model.addAttribute("eventLocation", eventLocation);
         model.addAttribute("content", HtmlCoder.decode(content));
         model.addAttribute("poster", poster);
-        model.addAttribute("created", created);
+        model.addAttribute("created", created_ts.toString());
         model.addAttribute("username", username);
+        model.addAttribute("party", Arrays.asList((partyStr.split(" "))));
+        model.addAttribute("aid", aid);
         return "show_activity";
+    }
+    
+    @RequestMapping("joinActivity")
+    public void joinActivity(HttpServletResponse response, HttpServletRequest request) throws IOException
+    {
+        PrintWriter out = response.getWriter();
+        String username = request.getParameter("username");
+        String aidStr = request.getParameter("aid");
+        SqlCon c = new SqlCon();
+        JSONObject json=new JSONObject();
+        // 确认活动是否存在
+        String party = null;
+        Timestamp created_ts = null;
+        ResultSet res = c.executeQuery("select * from sedb.activity where aid=" + aidStr + " limit 0, 1");
+        try {
+            if (res != null && res.first()) {
+                created_ts = res.getTimestamp("created");
+                party = res.getString("party");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("error at 126 of addActivity in ActivityController.java");
+        }
+        if (created_ts == null) 
+        { 
+            json.put("feedback", "无法参加");
+            return;
+        }
+        
+        // 活动存在，确认当前用户是否参加活动
+        int i = party.indexOf(username);
+        if (i != -1) { json.put("feedback", "参加过这个活动了"); }
+        else
+        {
+            // 用户没有参加过这个活动
+            String upd = "update sedb.user set activity = CONCAT(activity, ' ', \"" + aidStr +
+                    "\") where username = \"" + username + "\";";
+            c.executeUpdate(upd);
+            upd = "update sedb.activity set party = CONCAT(party, ' ', \"" + username +
+                    "\") where aid = \"" + aidStr + "\";";
+            c.executeUpdate(upd);
+            json.put("feedback", "参加成功！");
+        }
+        out.print(json);
     }
 }
 
