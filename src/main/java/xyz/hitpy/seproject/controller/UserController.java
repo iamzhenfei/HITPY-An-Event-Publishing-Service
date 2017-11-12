@@ -45,6 +45,10 @@ public class UserController {
         List<String> aids =  Arrays.asList((activity.split(" ")));
         List<String> activities = new ArrayList<String>();
         Iterator<String> it = aids.iterator();
+        if(it.hasNext())
+        {
+        	    it.next();
+        }
         while(it.hasNext())
         {
             query = "SELECT name FROM sedb.activity where aid=" + it.next() +" limit 1";
