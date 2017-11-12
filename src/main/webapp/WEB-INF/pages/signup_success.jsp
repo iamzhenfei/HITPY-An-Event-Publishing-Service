@@ -5,14 +5,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<script language="javascript" type="text/javascript"> 
-		sleep(2000);
-		window.location.href="index"
+
+	<script language="javascript" type="text/javascript">
+		function sleep(numberMillis) { 
+			var now = new Date(); 
+			var exitTime = now.getTime() + numberMillis; 
+			while (true) { 
+				now = new Date(); 
+				if (now.getTime() > exitTime) 
+					return; 
+			}
+		} 
+	
+		function load(){
+			sleep(2000);
+			window.location.href="index";
+		}
 	</script>
 
 </head>
 
-<body>注册成功
+<body  onLoad="load()">
+	注册成功
 </body>
 
 </html>

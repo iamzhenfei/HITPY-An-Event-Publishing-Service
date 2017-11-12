@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import xyz.hitpy.seproject.model.ActivityPreview;
+//import xyz.hitpy.seproject.model.ActivityPreview;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
 @Controller
