@@ -40,7 +40,7 @@ div {
 		<div class="navbar-header">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand">HIT_PY</a>
+					<a class="navbar-brand" href="index">HIT_PY</a>
 					<ul class="nav navbar-nav navbar-right" id="logout">
 						<li class="navbar-right"><a href="logout">退出</a></li>
 					</ul>
@@ -53,7 +53,7 @@ div {
 		<blockquote class="blockquote-reverse">
 			<p style="color: mintcream">${ps}</p>
 			<footer style="color: mintcream">${username}</footer>
-		</blockquote>	
+		</blockquote>
 <div id = "c2" style="width: 85%;margin-left: 7.5%; ">		
 		<ul class="list-group">
   <li class="list-group-item"><b><span class="label label-default">入学年份</span> <span style="float:right"> ${entryYear}</span>   </b></li>

@@ -43,6 +43,7 @@ public class ActivityController {
         if (username == null || username.equals("")) { return "redirect:login"; }
         SqlCon c = new SqlCon();
         int uid = 0;
+        System.out.println(content);
         ResultSet res = c.executeQuery("SELECT * FROM sedb.user WHERE USERNAME = " + "\"" + username + "\" limit 0, 1");
         try {
             if (res != null && res.first()) {
