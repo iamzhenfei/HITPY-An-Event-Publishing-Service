@@ -2,6 +2,7 @@ package xyz.hitpy.seproject.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -44,6 +45,12 @@ public class SignupController {
             @RequestParam("gender") int gender, @RequestParam("entryYear") int entryYear, @RequestParam("ps") String ps)
     {
         SqlCon sqlCon = new  SqlCon();
+        try {
+			ps = new String(ps.getBytes("ISO-8859-1"),"UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         String update = "insert into user (username, password, gender, entryYear, ps) values (\""
         + username + "\", \"" + password + "\", " + gender + ", " + entryYear + ", \"" + ps + "\");";
         sqlCon.executeUpdate(update);

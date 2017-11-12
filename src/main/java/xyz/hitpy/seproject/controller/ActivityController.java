@@ -1,5 +1,6 @@
 package xyz.hitpy.seproject.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
@@ -20,11 +22,21 @@ public class ActivityController {
     @RequestMapping("/create_activity")
     public String createActivityPage() { return "create_activity"; }
     
-    @RequestMapping("/postnow")
+    @RequestMapping(value = "/postnow", method =  RequestMethod.POST)
     public String addActivity(@RequestParam("eventName") String eventName, @RequestParam("eventLocation") String eventLocation,
             @RequestParam("eventTime") String eventTime, @RequestParam("content") String content, ModelMap model,
             HttpServletResponse response,HttpServletRequest request)
     {
+    		try {
+				eventName = new String(eventName.getBytes("ISO-8859-1"),"UTF-8");
+				eventLocation = new String(eventLocation.getBytes("ISO-8859-1"),"UTF-8");
+				eventTime = new String(eventTime.getBytes("ISO-8859-1"),"UTF-8");
+				content = new String(content.getBytes("ISO-8859-1"),"UTF-8");
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    		System.out.println(eventName);
         String username = (String) request.getSession().getAttribute("username");
         if (username == null || username.equals("")) { return "redirect:login"; }
         SqlCon c = new SqlCon();
