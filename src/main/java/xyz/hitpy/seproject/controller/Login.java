@@ -20,8 +20,7 @@ import xyz.hitpy.seproject.service.LoginService;
 public class Login {
 	@RequestMapping(value = "")
 	public String indexPage(ModelMap model) {
-		model.addAttribute("username", "");
-		return "index";
+		return "redirect:index";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(ModelMap model) {
@@ -58,7 +57,7 @@ public class Login {
 			    response.addCookie(userNameCookie);  
 			    response.addCookie(passwordCookie);  
 			}
-			return "index";
+			return "redirect:index";
 		}
 		else
 			model.addAttribute("error", "用户名错误或密码不存在");
@@ -81,7 +80,7 @@ public class Login {
 	    request.getSession().removeAttribute("username");  
 
 	    request.getSession().removeAttribute("password"); 
-	    model.addAttribute("username","");
-	    return "index";
+	    //model.addAttribute("username","");
+	    return "redirect:index";
 	}  
 }
