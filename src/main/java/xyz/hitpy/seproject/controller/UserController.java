@@ -19,7 +19,7 @@ import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
 @Controller
 public class UserController {
-    @RequestMapping("showProfile")
+    @RequestMapping("myspace")
     public String showProfile(HttpServletRequest request, HttpServletResponse response,ModelMap model)
     {
         String username = (String)request.getSession().getAttribute("username");
@@ -66,6 +66,6 @@ public class UserController {
         model.addAttribute("activitylist", activities);
         model.addAttribute("gender", gender);
         model.addAttribute("uid", uid);
-        return "show_profile";
+        return "myspace";
     }
 }
