@@ -77,7 +77,7 @@ body {
 						<li class="navbar-right"><a href="signup">注册</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right" id="username">
-						<li class="navbar-right"> <a style="text-align:center" href="profile"> ${username} </a></li>
+						<li class="navbar-right"> <a style="text-align:center" href="myspace"> ${username} </a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right" id="logout">
 						<li class="navbar-right"><a href="logout">退出</a></li>
