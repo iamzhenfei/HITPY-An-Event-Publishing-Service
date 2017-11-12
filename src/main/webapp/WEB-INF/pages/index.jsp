@@ -69,7 +69,7 @@ body {
 		<div class="navbar-header">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand">HIT_PY</a>
+					<a class="navbar-brand" href="index">HIT_PY</a>
 					<ul class="nav navbar-nav navbar-right" id="login">
 						<li class="navbar-right"><a href="login">登录</a></li>
 					</ul>
@@ -77,7 +77,8 @@ body {
 						<li class="navbar-right"><a href="signup">注册</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right" id="username">
-						<li class="navbar-right"> <a style="text-align:center" href="myspace"> ${username} </a></li>
+						<li class="navbar-right"><a style="text-align: center"
+							href="myspace"> ${username} </a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right" id="logout">
 						<li class="navbar-right"><a href="logout">退出</a></li>
@@ -88,31 +89,27 @@ body {
 	</nav>
 	<div class="jumbotron"
 		style="opacity: 1; background-color: rgb(0, 0, 0);">
-		<div class="container">
-			<h1 style="">别注册了</h1>
+		<div class="container" style="padding: 10px 100px 10px;">
+			<h1 style="color: mintcream">发现一个更精彩的世界</h1>
 			<p>
 				<button class="btn btn-primary btn-lg" onclick="onclickname()"
-					id="postButton">你要不要考虑发个帖子</button>
+					id="postButton" style="padding: 10px 100px 10px;">发布活动</button>
 			</p>
 		</div>
 
 		<div id="forum"></div>
 
-		
-		<div class="bs-docs-example">
-            <table class="table">
-              <tbody>
-              	<c:forEach items="${activitylist}" var="p">
-	                <tr>
-	                  <td>
-	                  	<a href="showActivity?aid=${p.aid}">${p.name}</a>
-	                  </td>
-	                </tr>
-	            </c:forEach>
-              </tbody>
-            </table>
-          </div>
-
+		<div class="bs-docs-example" style="padding: 30px 100px 10px;">
+			<table class="table" >
+				<tbody>
+					<c:forEach items="${activitylist}" var="p">
+						<tr>
+							<td><a href="showActivity?aid=${p.aid}" style="color: mintcream">${p.name}</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 

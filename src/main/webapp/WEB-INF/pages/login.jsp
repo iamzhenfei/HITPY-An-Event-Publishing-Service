@@ -49,6 +49,7 @@ body {
 <body>
     <h1 style="width: 125px;font-size: 50px;margin-left: auto;margin-right: auto;color:mintcream">登 录</h1>
 	<form action="loginnow" method="post">
+
 		<div style="width: 400px;height: 300px;padding: 10px 50px;
 		margin-top: 50px;margin-left: auto;margin-right: auto;
 		border-style: solid;border-width:thin;background: rgba(255,255,255, 0.2);">

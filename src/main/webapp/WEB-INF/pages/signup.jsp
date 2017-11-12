@@ -52,6 +52,7 @@ body {
 </head>
 
 <body>
+
     <h1 style="width: 125px;font-size: 50px;margin-left: auto;margin-right: auto;color:mintcream">注 册</h1>
 	<form action="addUser" method="post">
         <div style="width: 400px;height: 500px;padding: 10px 50px;
@@ -87,7 +88,9 @@ body {
 		<button id="btn" class="btn btn-primary btn-lg"
 			style="width: 300px;">注册</button>
 		</div>
+
 	</form>
+
 </body>
 
 </html>
