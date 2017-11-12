@@ -7,7 +7,7 @@
 <head>
 <style>
 #MyBody {
-	background-color: rgb(40, 50, 50);
+	background-color: rgb(0, 0, 0);
 }
 
 nav {
@@ -24,7 +24,7 @@ div {
 	width: 70%;
 	height: 100%;
 	border: 0px solid #ccc;
-	background: rgb(40, 50, 50);
+	background: rgb(0, 0, 0);
 }
 
 </style>
@@ -68,7 +68,7 @@ div {
               	<c:forEach items="${activitylist}" var="p">
 	                <tr>
 	                  <td>
-	                  	<a>${p}</a>
+	                  	<a href="showActivity?aid=${p.aid}">${p.name}</a>
 	                  </td>
 	                </tr>
 	            </c:forEach>
