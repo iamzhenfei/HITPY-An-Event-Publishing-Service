@@ -47,9 +47,10 @@ body {
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+    <h1 style="width: 125px;font-size: 50px;margin-left: auto;margin-right: auto;color:mintcream">登 录</h1>
 	<form action="loginnow" method="post">
 		<div style="width: 400px;height: 300px;padding: 10px 50px;
-		margin-top: 150px;margin-left: auto;margin-right: auto;
+		margin-top: 50px;margin-left: auto;margin-right: auto;
 		border-style: solid;border-width:thin;background: rgba(255,255,255, 0.2);">
 		
 			<div class="input-group" style="width: 300px;margin: 40px 0px;">
