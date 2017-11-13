@@ -49,7 +49,7 @@ div {
 		</div>
 	</nav>
 	<div id="container">
-		<h1 style="color: mintcream">${username}的空间</h1>
+		<h1 style="color: mintcream; padding: 10px 100px 10px">${username}的空间</h1>
 		<blockquote class="blockquote-reverse">
 			<p style="color: mintcream">${ps}</p>
 			<footer style="color: mintcream">${username}</footer>
@@ -61,14 +61,14 @@ div {
   <li class="list-group-item"><b><span class="label label-default">发起活动数量</span>     <span style="float:right">${uid}</span></b></li>
 </ul>
 </div>
-	<h4 style="color: mintcream">我参加的活动</h4>
+	<h4 style="color: mintcream; padding: 10px 100px 10px">我参加的活动</h4>
 <div class="bs-docs-example">
             <table class="table">
               <tbody>
               	<c:forEach items="${activitylist}" var="p">
 	                <tr>
 	                  <td>
-	                  	<a href="showActivity?aid=${p.aid}">${p.name}</a>
+	                  	<a href="showActivity?aid=${p.aid}" style="color: mintcream">${p.name}</a>
 	                  </td>
 	                </tr>
 	            </c:forEach>

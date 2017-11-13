@@ -48,37 +48,46 @@ window.onload = function(){
 <link href="resources/bootstrap.min.js" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<style> 
+	body {
+		background-color: rgb(0,0,0);
+	}
+</style>	
 </head>
 <body>
-	<form action="postnow" method="post">
-		<!-- 
-			<select name="eventType"> 
-				<option value="0"> 社团活动 </option> 
-				<option value="1"> 快去上课 </option>
-				<option value="2"> 要睡懒觉 </option> 
-			</select> 
-		 -->
-
-		<div class="input-group-addon">
-			<input type="text" id="eventName" name="eventName" value=""
-				placeholder="活动名称" class="form-control" />
+	
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index">HIT_PY</a>
+					<ul class="nav navbar-nav navbar-right" id="username">
+						<li class="navbar-right"><a style="text-align: center"
+							href="myspace"> ${username} </a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
+	</nav>
+
+	<form action="postnow" method="post" style="align:center; padding: 5% 5% 20%" >
+		
+		<input type="text" id="eventName" name="eventName" value=""
+			placeholder="活动名称" class="form-control" />
+		<br />
+		<br />
+		
+		<input type="text" id="eventLocation" name="eventLocation" value=""
+			placeholder="活动地点" class="form-control" />
+		<br />
 		<br />
 
-		<div class="input-group-addon">
-			<input type="text" id="eventLocation" name="eventLocation" value=""
-				placeholder="活动地点" class="form-control" />
-		</div>
+		<input type="text" id="eventTime" name="eventTime" value=""
+			placeholder="活动时间" class="form-control" />
+		<br />
 		<br />
 
-		<div class="input-group-addon">
-			<input type="text" id="eventTime" name="eventTime" value=""
-				placeholder="活动时间" class="form-control" />
-		</div>
-		<br />
-
-		<div class="adjoined-bottom">
+		<div class="adjoined-bottom" style="align:center;">
 			<div class="grid-container">
 				<div class="grid-width-100">
 					<textarea name="content" id="content" rows="10" cols="80">
@@ -90,7 +99,9 @@ window.onload = function(){
 				</div>
 			</div>
 		</div>
-
+		<br />
+		<br />
+		<br />
 		<button id="btn" class="btn btn-primary btn-lg"
 			style="width: 40%; position: relative; left: 30%;">发布信息</button>
 	</form>
