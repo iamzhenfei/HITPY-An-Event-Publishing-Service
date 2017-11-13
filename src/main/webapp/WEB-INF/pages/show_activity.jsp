@@ -6,7 +6,26 @@
 <html>
 
 <head>
-
+<script>
+	function load(){
+		
+		// $("<h1 style=\"color=#66ccff\">？？？</h1>").prependTo($("#forum"));
+		
+		var user = "${username}";
+		
+		console.log(user);
+		
+		if (user == "")
+	    {	
+			document.getElementById("joinbutton").style.visibility="hidden";
+	    }
+	    else
+	    {
+			document.getElementById("joinbutton").style.visibility="visible";
+	    }
+		
+	}
+</script>
 <style>
 #MyBody {
 	background-color: rgb(41, 41, 41);
@@ -54,7 +73,7 @@ div {
     
 </head>
 
-<body id="MyBody">
+<body id="MyBody" onLoad="load()">
 	<nav class="navbar navbar-inverse" role="navigation">
 		<div class="navbar-header">
 			<div class="container">
@@ -95,7 +114,7 @@ div {
     
     <br />
     	<div style="margin: 1% 25%">
-    <button onclick="join()" type="button" class="btn btn-primary btn-lg btn-block"> 参加活动 </button>
+    <button onclick="join()" type="button" class="btn btn-primary btn-lg btn-block" id="joinbutton"> 参加活动 </button>
     </div>
     </div>
 </body>
