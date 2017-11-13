@@ -82,6 +82,7 @@ body {
 					<ul class="nav navbar-nav navbar-right" id="logout">
 						<li class="navbar-right"><a href="logout">退出</a></li>
 					</ul>
+					
 				</div>
 			</div>
 		</div>
@@ -95,6 +96,20 @@ body {
 					id="postButton" style="padding: 10px 100px 10px;">发布活动</button>
 			</p>
 		</div>
+		
+		<form action="search" method="post" style="padding: 0px 100px 10px; white-space:nowrap;">
+				<div class="row">
+		            <div class="col-lg-6">
+		                <div class="input-group">
+		                    <input type="text" class="form-control" style="min-width:500px" id="name" name="name">
+		                    <span class="input-group-btn">
+		                        <button class="btn btn-default" type="submit" style="color:(255,255,255)">搜索</button>
+		                    </span>
+		                </div>
+		            </div>
+	            </div>
+	        
+		</form>
 
 		<div id="forum"></div>
 

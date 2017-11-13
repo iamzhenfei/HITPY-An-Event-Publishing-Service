@@ -20,7 +20,7 @@ nav {
 div {
 	margin: 0;
 	padding: 0;
-	border-radius:25px;
+	border-radius:10px;
 }
 
 #container {
@@ -73,6 +73,13 @@ div {
     <br /> <h1 style="color: mintcream">${eventName}</h1>
     <br /> <a style="color: mintcream">活动时间：${eventTime} </a>
     <br /> <a style="color: mintcream">活动地点：${eventLocation}</a>
+    <div>
+    <br />
+    <a style="color: mintcream;">已参加活动：</a>
+    <c:forEach items="${party}" var="p" >
+            <a style="color: mintcream;padding:0% 5%">${p}</a> <br/>
+    </c:forEach>
+    </div>
     <br />
     <div style="margin:5% 5%;background: rgba(255, 255, 255, 0.8);">
     	<br/>
@@ -85,12 +92,7 @@ div {
     <br />
     <br />
     <br />
-    <div>
-    <a style="color: mintcream">已参加活动：</a>
-    <c:forEach items="${party}" var="p" >
-            <a style="color: mintcream">${p}</a> <br/>
-    </c:forEach>
-    </div>
+    
     <br />
     	<div style="margin: 1% 25%">
     <button onclick="join()" type="button" class="btn btn-primary btn-lg btn-block"> 参加活动 </button>

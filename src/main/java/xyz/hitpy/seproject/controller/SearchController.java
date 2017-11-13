@@ -1,5 +1,6 @@
 package xyz.hitpy.seproject.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,9 +20,14 @@ import xyz.hitpy.seproject.service.SearchService;
 
 @Controller
 public class SearchController {
-	@RequestMapping(value = "/search",method = RequestMethod.GET)
+	@RequestMapping(value = "/search",method = RequestMethod.POST)
 	public String searchByName(HttpServletRequest request, HttpServletResponse
 			response,ModelMap model,@RequestParam("name") String names){
+		try {
+			names = new String(names.getBytes("ISO-8859-1"),"UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			System.out.println("error at getBytes in searchByName of SearchController");
+		}
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("username"); 
 		model.addAttribute("username", username);
