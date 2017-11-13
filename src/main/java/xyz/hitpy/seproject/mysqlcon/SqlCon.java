@@ -17,7 +17,6 @@ public class SqlCon {
             Class.forName("com.mysql.jdbc.Driver");
 
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sedb?useUnicode=true&characterEncoding=UTF-8","root","jzfjzfjzf");
-
             stat=con.createStatement();
             
         }
