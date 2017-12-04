@@ -18,7 +18,6 @@
 		} 
 	
 		function load(){
-			sleep(2000);
 			window.location.href="index";
 		}
 	</script>

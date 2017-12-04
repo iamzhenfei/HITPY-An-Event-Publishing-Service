@@ -15,7 +15,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="resources/jquery.js"> </script>
 <script> 
-		sleep(2000);
 		window.location.href="index"
 	</script>
 </head>

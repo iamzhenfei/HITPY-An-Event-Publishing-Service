@@ -59,15 +59,9 @@ div {
     
     <script type="text/javascript">
         function join(){
-            $.ajax({
-                type:"post",
-                url:"joinActivity",
-                dataType:"json",    //data传递的是一个json类型的值，而不是字符串，且必须标明dataType的类型，否则会出现400错误或者其他错误。
-                data:{"username":String("${username}"), "aid":String("${aid}")},
-                success:function (data) {
-                    alert(data.feedback);
-                }
-            });
+        	var aid = ${aid};
+        	var name = "${eventName}";
+        	window.location.href="joinActivity?aid="+aid+"&name="+name; 
         }
     </script>
     
