@@ -23,8 +23,8 @@
 <script type="text/javascript" src="resources/ckeditor/ckeditor.js"> </script>
 <script type="text/javascript">
         function join(){
-        	var contact = Element.getElementById("contact");
-        	var reason =  Element.getElementById("reason");
+        	var contact = document.getElementById("contact").value;
+        	var reason =  document.getElementById("reason").value;
             $.ajax({
                 type:"post",
                 url:"apply",
@@ -76,9 +76,8 @@
 			placeholder="联系方式" class="form-control" />
 		<br />
 		<br />
-		
-		<input type="text" id="reason" name="reason" value=""
-			placeholder="参加原因" class="form-control" />
+		<textarea rows="5" cols="70" id="reason" name="reason" class="form-control">参加原因</textarea>
+
 		<br />
 		<br />
 
