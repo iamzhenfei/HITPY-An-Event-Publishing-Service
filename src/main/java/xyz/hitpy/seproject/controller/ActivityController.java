@@ -134,7 +134,6 @@ public class ActivityController {
         String aidStr = request.getParameter("aid");
         String reason = request.getParameter("reason");
         String contact = request.getParameter("contact");
-        String checku;
         SqlCon c = new SqlCon();
         JSONObject json=new JSONObject();
         // 确认活动是否存在
