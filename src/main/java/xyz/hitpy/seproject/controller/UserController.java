@@ -1,5 +1,13 @@
 package xyz.hitpy.seproject.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import xyz.hitpy.seproject.model.ActivityPreview;
+import xyz.hitpy.seproject.mysqlcon.SqlCon;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,16 +15,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import xyz.hitpy.seproject.model.ActivityPreview;
 //import xyz.hitpy.seproject.model.ActivityPreview;
-import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
 @Controller
 public class UserController {

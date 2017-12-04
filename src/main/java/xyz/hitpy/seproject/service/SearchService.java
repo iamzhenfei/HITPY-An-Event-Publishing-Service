@@ -1,10 +1,9 @@
 package xyz.hitpy.seproject.service;
 
-import java.sql.ResultSet;
-
 import org.springframework.stereotype.Service;
-
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
+
+import java.sql.ResultSet;
 
 @Service
 public class SearchService {
