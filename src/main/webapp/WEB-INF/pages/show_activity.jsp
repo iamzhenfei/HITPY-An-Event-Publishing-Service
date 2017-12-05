@@ -87,7 +87,7 @@
     <br/> <a style="color: mintcream">活动地点：${eventLocation}</a>
     <div>
         <br/>
-        <a style="color: mintcream;">已参加活动：</a>
+        <a style="color: mintcream;">已参加活动的人：</a>
         <c:forEach items="${party}" var="p">
             <a style="color: mintcream;padding:0% 5%">${p}</a> <br/>
         </c:forEach>

@@ -78,6 +78,23 @@
             </tbody>
         </table>
     </div>
+    <h4 style="color: mintcream; padding: 10px 100px 10px">我发布的活动</h4>
+    <div class="bs-docs-example">
+        <table class="table">
+            <tbody>
+            <c:forEach items="${myActivitylist}" var="p">
+                <tr>
+                    <td>
+                        <a href="showActivity?aid=${p.aid}" style="color: mintcream">${p.name}</a>
+                    </td>
+                    <td>
+                        <a href="checkJoiner?aid=${p.aid}" style="color: mintcream">${p.checkNum}</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>
