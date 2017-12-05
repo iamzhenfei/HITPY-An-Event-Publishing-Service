@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import xyz.hitpy.seproject.model.CheckPreview;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
-
+@Controller
 public class CheckController {
     @RequestMapping(value = "apply")
     public void joinActivity(HttpServletResponse response, HttpServletRequest request) throws IOException
@@ -33,9 +34,7 @@ public class CheckController {
         String username = (String) request.getSession().getAttribute("username");
         String aidStr = request.getParameter("aid");
         String reason = request.getParameter("reason");
-        reason = new String(reason.getBytes("ISO-8859-1"), "UTF-8");
         String contact = request.getParameter("contact");
-        contact = new String(contact.getBytes("ISO-8859-1"), "UTF-8");
         String checku = "";
         SqlCon c = new SqlCon();
         JSONObject json=new JSONObject();
@@ -152,7 +151,7 @@ public class CheckController {
         if (joiner == null) { return "404"; }
         // 准备从tocheck表删去这条请求
         String upd = "delete from sedb.tocheck where id = " + id + " limit 1;";
-        c.executeUpdate("upd");
+        c.executeUpdate(upd);
         // 从activity表中删去checkid中的id，删去checku中的joiner，在party添加joiner
         String checkid = null;
         String checku = null;
@@ -170,10 +169,7 @@ public class CheckController {
         upd = "update sedb.activity set checkid=\"" + checkid + "\", checku=\"" + checku + "\", party=\""
                 + party + "\" where aid = " + Integer.toString(aid) + " limit 1";
         c.executeUpdate(upd);
-        String anameR = new String(aname.getBytes("ISO-8859-1"), "UTF-8");
-        attr.addFlashAttribute("aname", anameR);
-        attr.addFlashAttribute("aid", aid);
-        return "redirect:/checkJoiner";
+        return "redirect:checkJoiner?aname=" + aname + "&aid=" + aid;
     }
     
     @RequestMapping("declinejoin")
@@ -192,7 +188,7 @@ public class CheckController {
         if (joiner == null) { return "404"; }
         // 准备从tocheck表删去这条请求
         String upd = "delete from sedb.tocheck where id = " + id + " limit 1;";
-        c.executeUpdate("upd");
+        c.executeUpdate(upd);
         // 从activity表中删去checkid中的id，删去checku中的joiner
         String checkid = null;
         String checku = null;
@@ -207,9 +203,6 @@ public class CheckController {
         upd = "update sedb.activity set checkid=\"" + checkid + "\", checku=\"" + checku +
                 "\" where aid = " + Integer.toString(aid) + " limit 1";
         c.executeUpdate(upd);
-        String anameR = new String(aname.getBytes("ISO-8859-1"), "UTF-8");
-        attr.addFlashAttribute("aname", anameR);
-        attr.addFlashAttribute("aid", aid);
-        return "redirect:/checkJoiner";
+        return "redirect:checkJoiner?aname=" + aname + "&aid=" + aid;
     }
 }
