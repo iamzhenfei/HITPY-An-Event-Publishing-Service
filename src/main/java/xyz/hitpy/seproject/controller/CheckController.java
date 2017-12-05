@@ -1,0 +1,135 @@
+package xyz.hitpy.seproject.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import xyz.hitpy.seproject.model.CheckPreview;
+import xyz.hitpy.seproject.mysqlcon.SqlCon;
+
+public class CheckController {
+    @RequestMapping(value = "apply")
+    public void joinActivity(HttpServletResponse response, HttpServletRequest request) throws IOException
+    {
+        response.setCharacterEncoding("UTF-8");  
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String username = (String) request.getSession().getAttribute("username");
+        String aidStr = request.getParameter("aid");
+        String reason = request.getParameter("reason");
+        reason = new String(reason.getBytes("ISO-8859-1"), "UTF-8");
+        String contact = request.getParameter("contact");
+        contact = new String(contact.getBytes("ISO-8859-1"), "UTF-8");
+        String checku = "";
+        SqlCon c = new SqlCon();
+        JSONObject json=new JSONObject();
+        // 确认活动是否存在
+        String party = null;
+        Timestamp created_ts = null;
+        ResultSet res = c.executeQuery("select * from sedb.activity where aid=" + aidStr + " limit 0, 1");
+        try {
+            if (res != null && res.first()) {
+                created_ts = res.getTimestamp("created");
+                party = res.getString("party");
+                checku = res.getString("checku");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("error at 126 of addActivity in ActivityController.java");
+        }
+        
+        if (created_ts == null) 
+        { 
+            json.put("feedback", "无法参加");
+            out.print(json);
+            return;
+        }
+        
+        // 活动存在，确认当前用户是否参加活动
+        int i = party.indexOf(username);
+        if (i != -1) 
+        { 
+            json.put("feedback", "参加过这个活动了"); 
+            out.print(json);
+            return;
+        }
+        
+        // 确认当前用户是否发出过申请并且未被审查
+        i = checku.indexOf(username);
+        if (i != -1)
+        {
+            json.put("feedback", "发出的申请还没被处理，请耐心等待");
+            out.print(json);
+            return;
+        }
+        
+        // 用户没有参加过这个活动，也没有发出过申请
+        String upd = "insert into sedb.tocheck(joiner, aid, reason, contact) values(\"" + username +
+                "\",\"" + aidStr + "\",\"" + reason + "\", \"" + contact + "\");";
+        c.executeUpdate(upd);
+        int id = -1;
+        res = c.executeQuery("SELECT id FROM sedb.tocheck WHERE joiner = " + "\"" + username +
+                "\" and aid=" + aidStr + " limit 0, 1");
+        try {
+            if (res != null && res.first()) {
+                id = res.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("error at 193 of addActivity in ActivityController.java");
+        }
+        // 申请已加入数据库，现在把申请的id和申请者加入到activity表中
+        upd = "update sedb.activity set checkid = CONCAT(checkid, ' ', \"" + id +
+                "\"),"+ "checku = CONCAT(checku, ' ', \"" + username + "\") where aid = \"" + aidStr + "\";";
+        c.executeUpdate(upd);
+        json.put("feedback", "申请成功！");
+        out.print(json);
+    }
+    
+    @RequestMapping(value = "checkJoiner")
+    public String checkJoiner(@RequestParam("aid") String aid, @RequestParam("aname") String aname,
+            ModelMap model, HttpServletResponse response, HttpServletRequest request) throws SQLException
+    {
+        SqlCon c = new SqlCon();
+        String query = "select  checkid from sedb.activity where aid = " + aid + " limit 1;";
+        ResultSet res = c.executeQuery(query);
+        String checkid = null;
+        if (res != null && res.first()) {
+            checkid = res.getString("checkid");
+        }
+        if (checkid == null) { return "404"; }
+        List<String> checkids =  Arrays.asList((checkid.split(" ")));
+        checkids = checkids.subList(1, checkids.size());
+        Iterator<String> it = checkids.iterator();
+        ArrayList<CheckPreview> checkList = new ArrayList<CheckPreview>();
+        int i;
+        while(it.hasNext())
+        {
+            i = Integer.parseInt(it.next());
+            query = "select * from sedb.tocheck where id = " + i + " limit 1;";
+            res = c.executeQuery(query);
+            while(res.next())
+            {
+                checkList.add(new CheckPreview(res.getString("joiner"), res.getString("reason"),
+                        res.getString("contact"), i));
+            }
+        }
+        model.addAttribute("checklist", checkList);
+        model.addAttribute("aname", aname);
+        return "check_joiner";
+    }
+}
