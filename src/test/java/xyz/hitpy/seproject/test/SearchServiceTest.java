@@ -1,12 +1,11 @@
 package xyz.hitpy.seproject.test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+import xyz.hitpy.seproject.service.SearchService;
 
 import java.sql.ResultSet;
 
-import org.junit.Test;
-
-import xyz.hitpy.seproject.service.SearchService;
+import static org.junit.Assert.*;
 
 public class SearchServiceTest {
 
