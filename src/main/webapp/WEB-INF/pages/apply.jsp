@@ -23,8 +23,8 @@
 <script type="text/javascript" src="resources/ckeditor/ckeditor.js"> </script>
 <script type="text/javascript">
         function join(){
-        	var contact = Element.getElementById("contact");
-        	var reason =  Element.getElementById("reason");
+        	var contact = document.getElementById("contact").value;
+        	var reason =  document.getElementById("reason").value;
             $.ajax({
                 type:"post",
                 url:"apply",

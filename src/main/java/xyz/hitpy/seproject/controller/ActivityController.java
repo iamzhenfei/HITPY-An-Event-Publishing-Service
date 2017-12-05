@@ -43,7 +43,6 @@ public class ActivityController {
         if (username == null || username.equals("")) { return "redirect:login"; }
         SqlCon c = new SqlCon();
         int uid = 0;
-        System.out.println(content);
         ResultSet res = c.executeQuery("SELECT * FROM sedb.user WHERE USERNAME = " + "\"" + username + "\" limit 0, 1");
         try {
             if (res != null && res.first()) {
@@ -55,9 +54,9 @@ public class ActivityController {
         }
         // 通过cookie验证了
         uid++;  // 用户发帖数加1
-        String upd = "insert into sedb.activity(name, time, location, content, username, uid) values(\"" + eventName +
+        String upd = "insert into sedb.activity(name, time, location, content, username, uid, checku) values(\"" + eventName +
                 "\",\"" + eventTime + "\",\"" + eventLocation + "\", \"" + HtmlCoder.encode(content) + "\", \"" + username +
-                "\"," + uid + ");";
+                "\"," + uid + ", '');";
         c.executeUpdate(upd);
         upd = "update sedb.user set uid = " + uid + " where username = \"" + username + "\";";
         c.executeUpdate(upd);
@@ -118,6 +117,7 @@ public class ActivityController {
             HttpServletResponse response, HttpServletRequest request) throws IOException
     {
         model.addAttribute("aid", aid);
+        name = new String(name.getBytes("ISO-8859-1"),"UTF-8");
         model.addAttribute("name", name);
         String username = (String) request.getSession().getAttribute("username");
         model.addAttribute("username", username);
@@ -130,10 +130,13 @@ public class ActivityController {
         response.setCharacterEncoding("UTF-8");  
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String username = request.getParameter("username");
+        String username = (String) request.getSession().getAttribute("username");
         String aidStr = request.getParameter("aid");
         String reason = request.getParameter("reason");
+        reason = new String(reason.getBytes("ISO-8859-1"),"UTF-8");
         String contact = request.getParameter("contact");
+        contact = new String(contact.getBytes("ISO-8859-1"),"UTF-8");
+        String checku = "";
         SqlCon c = new SqlCon();
         JSONObject json=new JSONObject();
         // 确认活动是否存在
@@ -168,7 +171,7 @@ public class ActivityController {
         }
         
         // 确认当前用户是否发出过申请并且未被审查
-        i = party.indexOf(username);
+        i = checku.indexOf(username);
         if (i != -1)
         {
             json.put("feedback", "发出的申请还没被处理，请耐心等待");
