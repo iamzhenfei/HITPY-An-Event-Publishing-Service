@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <style>
         #MyBody {
             background-color: rgb(0, 0, 0);
@@ -30,7 +32,8 @@
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>审核${aname}参加申请</title>
-    <link href="https://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body id="MyBody">
 <nav class="navbar navbar-inverse" role="navigation">
@@ -47,29 +50,33 @@
 </nav>
 <div id="container">
     <h4 style="color: mintcream; padding: 10px 100px 10px">参加人员列表</h4>
-    <div class="accordion" id="accordion2">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <c:forEach items="${checklist}" var="p">
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <div style="color: mintcream" class="pull-left">${p.joiner}：</div>
-                    <div style="color: mintcream">${p.contact}</div>
-                    <div class="pull-right">
-                        <button class="btn btn-danger"
-                                onclick='window.location.href = "declinejoin?aname=${aname}&id=${p.id}";'>拒绝
-                        </button>
-                    </div>
-                    <div class="pull-right">
-                        <button class="btn btn-success"
-                                onclick='window.location.href = "acceptjoin?aname=${aname}&id=${p.id}";'>同意
-                        </button>
-                    </div>
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                       href="#collapse${p.id}">
-                        点击显示申请理由
-                    </a>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading${p.id}">
+                    <h4 class="panel-title">
+                        <div style="color: #030206" class="pull-left">${p.joiner}：</div>
+                        <div style="color: #030206">${p.contact}</div>
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-xs"
+                                    onclick='window.location.href = "declinejoin?aname=${aname}&id=${p.id}";'>拒绝
+                            </button>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-success btn-xs"
+                                    onclick='window.location.href = "acceptjoin?aname=${aname}&id=${p.id}";'>同意
+                            </button>
+                        </div>
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapse${p.id}"
+                           aria-expanded="false" aria-controls="collapse${p.id}">
+                            展开申请理由
+                        </a>
+                    </h4>
                 </div>
-                <div id="collapse${p.id}" class="accordion-body collapse" style="height: 0px; ">
-                    <div class="accordion-inner" style="color: mintcream">
+                <div id="collapse${p.id}" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading${p.id}">
+                    <div class="panel-body">
                             ${p.reason}
                     </div>
                 </div>
@@ -77,7 +84,8 @@
         </c:forEach>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/2.3.2/js/bootstrap.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>
