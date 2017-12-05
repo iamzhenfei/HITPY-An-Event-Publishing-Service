@@ -4,13 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
-
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
     <script>
-        function load() {
-
-            // $("<h1 style=\"color=#66ccff\">？？？</h1>").prependTo($("#forum"));
-
+        var searchService, map, markers = [];
+        var init = function () {
             var user = "${username}";
 
             console.log(user);
@@ -21,7 +22,46 @@
             else {
                 document.getElementById("joinbutton").style.visibility = "visible";
             }
+            var center = new qq.maps.LatLng(45.740627, 126.633210);
+            map = new qq.maps.Map(document.getElementById('map_canvas'), {
+                center: center,
+                zoom: 16
+            });
+            var latlngBounds = new qq.maps.LatLngBounds();
+            //调用Poi检索类
+            searchService = new qq.maps.SearchService({
+                complete: function (results) {
+                    var pois = results.detail.pois;
+                    for (var i = 0, l = pois.length; i < l; i++) {
+                        var poi = pois[i];
+                        latlngBounds.extend(poi.latLng);
+                        var marker = new qq.maps.Marker({
+                            map: map,
+                            position: poi.latLng
+                        });
 
+                        marker.setTitle(i + 1);
+
+                        markers.push(marker);
+                    }
+                    map.fitBounds(latlngBounds);
+                }
+            });
+            searchKeyword();
+        }
+        //清除地图上的marker
+        function clearOverlays(overlays) {
+            var overlay;
+            while (overlay = overlays.pop()) {
+                overlay.setMap(null);
+            }
+        }
+        function searchKeyword() {
+            var keyword = "${eventLocation}";
+            var region = "哈尔滨";
+            clearOverlays(markers);
+            searchService.setLocation(region);
+            searchService.search(keyword);
         }
     </script>
     <style>
@@ -46,10 +86,27 @@
             border: 0px solid #ccc;
             background: rgb(0, 0, 0);
         }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        p {
+            width: 603px;
+            padding-top: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        #map_canvas {
+            min-width: 700px;
+            min-height: 400px;
+        }
     </style>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>login</title>
+    <title>${eventName}</title>
     <script src="resources/jquery.js"></script>
     <link href="resources/bootstrap.min.js"/>
     <link rel="stylesheet"
@@ -65,7 +122,7 @@
 
 </head>
 
-<body id="MyBody" onLoad="load()">
+<body id="MyBody" onLoad="init()">
 <nav class="navbar navbar-inverse" role="navigation">
     <div class="navbar-header">
         <div class="container">
@@ -85,9 +142,10 @@
     <h1 style="color: mintcream">${eventName}</h1>
     <br/> <a style="color: mintcream">活动时间：${eventTime} </a>
     <br/> <a style="color: mintcream">活动地点：${eventLocation}</a>
+    <div id="map_canvas"></div>
     <div>
         <br/>
-        <a style="color: mintcream;">已参加活动的人：</a>
+        <a style="color: mintcream;">已参加活动的小伙伴：</a>
         <c:forEach items="${party}" var="p">
             <a style="color: mintcream;padding:0% 5%">${p}</a> <br/>
         </c:forEach>
