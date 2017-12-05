@@ -88,7 +88,7 @@
                         <a href="showActivity?aid=${p.aid}" style="color: mintcream">${p.name}</a>
                     </td>
                     <td>
-                        <a href="checkJoiner?aid=${p.aid}" style="color: mintcream">${p.checkNum}</a>
+                        <a href="checkJoiner?aid=${p.aid}&aname=${p.name}" style="color: mintcream">${p.checkNum}</a>
                     </td>
                 </tr>
             </c:forEach>
