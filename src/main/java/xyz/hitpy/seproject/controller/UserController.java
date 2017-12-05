@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import xyz.hitpy.seproject.model.ActivityPreview;
+import xyz.hitpy.seproject.model.MyActivityPreview;
 //import xyz.hitpy.seproject.model.ActivityPreview;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
 
@@ -65,10 +66,31 @@ public class UserController {
                 }
             }
         }
+        
+        ArrayList<MyActivityPreview> myActivities = new ArrayList<MyActivityPreview>();
+        query = "select * from sedb.activity where username = \"" + username + "\";";
+        res = con.executeQuery(query);
+        String checkid = "";
+        List<String> checkids;
+        try {
+            while(res.next())
+            {
+                checkid = res.getString("checkid");
+                checkids =  Arrays.asList((checkid.split(" ")));
+                checkids = checkids.subList(1, checkids.size());
+                myActivities.add(new MyActivityPreview(res.getInt("aid"), res.getString("name"), 
+                        res.getString("time"), res.getString("location"), res.getString("username"), checkids.size()));
+            }
+        } catch (SQLException e) {
+            System.out.println("error at 80 in showProfile of userController");
+            e.printStackTrace();
+        }
+        
         model.addAttribute("username", username);
         model.addAttribute("entryYear", entryYear);
         model.addAttribute("ps", ps);
         model.addAttribute("activitylist", activities);
+        model.addAttribute("myActivitylist", myActivities);
         model.addAttribute("gender", gender);
         model.addAttribute("uid", uid);
         return "myspace";

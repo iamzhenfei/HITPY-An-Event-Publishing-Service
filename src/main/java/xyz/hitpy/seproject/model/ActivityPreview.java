@@ -1,11 +1,11 @@
 package xyz.hitpy.seproject.model;
 
 public class ActivityPreview {
-			private int aid;
-			private String name;
-			private String time;
-			private String location;
-			private String username;
+			protected int aid;
+			protected String name;
+			protected String time;
+			protected String location;
+			protected String username;
 			public ActivityPreview() {
 				aid = 0;
 				name = null;
