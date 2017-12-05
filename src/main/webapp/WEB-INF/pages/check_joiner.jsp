@@ -55,19 +55,19 @@
                     <div style="color: mintcream">${p.contact}</div>
                     <div class="pull-right">
                         <button class="btn btn-danger"
-                                onclick='window.location.href = "/acceptjoin?aname=${aname}&id=${p.id}";'>同意
+                                onclick='window.location.href = "acceptjoin?aname=${aname}&id=${p.id}";'>同意
                         </button>
                     </div>
                     <div class="pull-right">
                         <button class="btn btn-success"
-                                onclick='window.location.href = "/declinejoin?aname=${aname}&id=${p.id}";'>拒绝
+                                onclick='window.location.href = "declinejoin?aname=${aname}&id=${p.id}";'>拒绝
                         </button>
                     </div>
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${p.id}">
                         点击显示申请理由
                     </a>
                 </div>
-                <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+                <div id="collapse${p.id}" class="accordion-body collapse" style="height: 0px; ">
                     <div class="accordion-inner" style="color: mintcream">
                             ${p.reason}
                     </div>
