@@ -69,14 +69,15 @@
         </div>
     </div>
 </nav>
-<h1> ${name} </h1>
+<h1 style="color: mintcream"> ${name} </h1>
 
-
+<label for="reason">联系方式:</label>
 <input type="text" id="contact" name="contact" value=""
        placeholder="联系方式" class="form-control"/>
 <br/>
 <br/>
-<textarea rows="5" cols="70" id="reason" name="reason" class="form-control">参加原因</textarea>
+<label for="reason">参加原因:</label>
+<textarea rows="5" cols="70" id="reason" name="reason" class="form-control" placeholder="参加原因"></textarea>
 
 <br/>
 <br/>

@@ -115,7 +115,7 @@ public class ActivityController {
             HttpServletResponse response, HttpServletRequest request) throws IOException
     {
         model.addAttribute("aid", aid);
-        name = new String(name.getBytes("ISO-8859-1"),"UTF-8");
+        name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
         model.addAttribute("name", name);
         String username = (String) request.getSession().getAttribute("username");
         model.addAttribute("username", username);
@@ -131,9 +131,9 @@ public class ActivityController {
         String username = (String) request.getSession().getAttribute("username");
         String aidStr = request.getParameter("aid");
         String reason = request.getParameter("reason");
-        reason = new String(reason.getBytes("ISO-8859-1"),"UTF-8");
+        reason = new String(reason.getBytes("ISO-8859-1"), "UTF-8");
         String contact = request.getParameter("contact");
-        contact = new String(contact.getBytes("ISO-8859-1"),"UTF-8");
+        contact = new String(contact.getBytes("ISO-8859-1"), "UTF-8");
         String checku = "";
         SqlCon c = new SqlCon();
         JSONObject json=new JSONObject();
