@@ -36,15 +36,8 @@
             });
         }
     </script>
-
-
-    <!-- 创建编辑器并设置属性 -->
-
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>HIT_PY</title>
+    <title>申请啊</title>
     <link href="resources/bootstrap.min.js"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
