@@ -2,6 +2,7 @@ package xyz.hitpy.seproject.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import xyz.hitpy.seproject.model.CheckPreview;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
@@ -102,8 +104,9 @@ public class CheckController {
     
     @RequestMapping(value = "checkJoiner")
     public String checkJoiner(@RequestParam("aid") String aid, @RequestParam("aname") String aname,
-            ModelMap model, HttpServletResponse response, HttpServletRequest request) throws SQLException
+            ModelMap model, HttpServletResponse response, HttpServletRequest request) throws SQLException, UnsupportedEncodingException
     {
+        String anameR = new String(aname.getBytes("ISO-8859-1"), "UTF-8");
         SqlCon c = new SqlCon();
         String query = "select  checkid from sedb.activity where aid = " + aid + " limit 1;";
         ResultSet res = c.executeQuery(query);
@@ -129,7 +132,84 @@ public class CheckController {
             }
         }
         model.addAttribute("checklist", checkList);
-        model.addAttribute("aname", aname);
+        model.addAttribute("aname", anameR);
         return "check_joiner";
+    }
+    
+    @RequestMapping("acceptjoin")
+    public String acceptJoin(@RequestParam("id") int id,@RequestParam("aname") String aname,
+            RedirectAttributes attr) throws UnsupportedEncodingException, SQLException
+    {
+        SqlCon c = new SqlCon();
+        String query = "select * from sedb.tocheck where id = " + id + " limit 1;";
+        ResultSet res = c.executeQuery(query);
+        int aid = -1;
+        String joiner = null;
+        if (res != null && res.first()) {
+            aid = res.getInt("aid");
+            joiner = res.getString("joiner");
+        }
+        if (joiner == null) { return "404"; }
+        // 准备从tocheck表删去这条请求
+        String upd = "delete from sedb.tocheck where id = " + id + " limit 1;";
+        c.executeUpdate("upd");
+        // 从activity表中删去checkid中的id，删去checku中的joiner，在party添加joiner
+        String checkid = null;
+        String checku = null;
+        String party = null;
+        query = "select * from sedb.activity where aid = " + aid + " limit 1;";
+        res = c.executeQuery(query);
+        if (res != null && res.first()) {
+            checkid = res.getString("checkid");
+            checku = res.getString("checku");
+            party = res.getString("party");
+        }
+        checkid = checkid.replaceFirst(" " + Integer.toString(id), "");
+        checku = checku.replaceFirst(" " + joiner, "");
+        party = party + " " + joiner;
+        upd = "update sedb.activity set checkid=\"" + checkid + "\", checku=\"" + checku + "\", party=\""
+                + party + "\" where aid = " + Integer.toString(aid) + " limit 1";
+        c.executeUpdate(upd);
+        String anameR = new String(aname.getBytes("ISO-8859-1"), "UTF-8");
+        attr.addFlashAttribute("aname", anameR);
+        attr.addFlashAttribute("aid", aid);
+        return "redirect:/checkJoiner";
+    }
+    
+    @RequestMapping("declinejoin")
+    public String declineJoin(@RequestParam("id") int id,@RequestParam("aname") String aname,
+            RedirectAttributes attr) throws UnsupportedEncodingException, SQLException
+    {
+        SqlCon c = new SqlCon();
+        String query = "select * from sedb.tocheck where id = " + id + " limit 1;";
+        ResultSet res = c.executeQuery(query);
+        int aid = -1;
+        String joiner = null;
+        if (res != null && res.first()) {
+            aid = res.getInt("aid");
+            joiner = res.getString("joiner");
+        }
+        if (joiner == null) { return "404"; }
+        // 准备从tocheck表删去这条请求
+        String upd = "delete from sedb.tocheck where id = " + id + " limit 1;";
+        c.executeUpdate("upd");
+        // 从activity表中删去checkid中的id，删去checku中的joiner
+        String checkid = null;
+        String checku = null;
+        query = "select * from sedb.activity where aid = " + aid + " limit 1;";
+        res = c.executeQuery(query);
+        if (res != null && res.first()) {
+            checkid = res.getString("checkid");
+            checku = res.getString("checku");
+        }
+        checkid = checkid.replaceFirst(" " + Integer.toString(id), "");
+        checku = checku.replaceFirst(" " + joiner, "");
+        upd = "update sedb.activity set checkid=\"" + checkid + "\", checku=\"" + checku +
+                "\" where aid = " + Integer.toString(aid) + " limit 1";
+        c.executeUpdate(upd);
+        String anameR = new String(aname.getBytes("ISO-8859-1"), "UTF-8");
+        attr.addFlashAttribute("aname", anameR);
+        attr.addFlashAttribute("aid", aid);
+        return "redirect:/checkJoiner";
     }
 }
