@@ -23,7 +23,8 @@ public class ActivityController {
     
     @RequestMapping(value = "/postnow", method =  RequestMethod.POST)
     public String addActivity(@RequestParam("eventName") String eventName, @RequestParam("eventLocation") String eventLocation,
-            @RequestParam("eventTime") String eventTime, @RequestParam("content") String content,@RequestParam("tag") String[] tag,
+            @RequestParam("eventTime") String eventTime, @RequestParam("content") String content,
+            @RequestParam(value="tag", defaultValue="notag") String[] tag,
             ModelMap model,HttpServletResponse response,HttpServletRequest request)
     {
 		try {
@@ -65,11 +66,7 @@ public class ActivityController {
             sb.append("qita");
         String upd = "insert into sedb.activity(name, time, location, content, username, uid, checku, tag) values(\"" + eventName +
                 "\",\"" + eventTime + "\",\"" + eventLocation + "\", \"" + HtmlCoder.encode(content) + "\", \"" + username +
-                "\"," + uid + ", '', \"" + sb.toString() + "\");";
-        
-        System.out.println("tag[]:" + tag.toString());
-        System.out.println("upd:" + upd);
-        
+                "\"," + uid + ", '', \"" + sb.toString().replaceFirst("notag", "qita") + "\");";
         c.executeUpdate(upd);
         upd = "update sedb.user set uid = " + uid + " where username = \"" + username + "\";";
         c.executeUpdate(upd);
@@ -100,7 +97,7 @@ public class ActivityController {
                 sb.append(","); 
         }
         sb.append(" where username=\"" + username + "\";");
-        c.executeUpdate(sb.toString());
+        c.executeUpdate(sb.toString().replaceAll("notag", "qita"));
         return "create_a_success";
     }
     
