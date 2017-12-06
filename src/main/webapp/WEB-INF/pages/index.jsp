@@ -8,7 +8,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>HIT_PY</title>
+    <title>HIT_PY-发现一个更精彩的世界-</title>
 
     <style>
         body {
