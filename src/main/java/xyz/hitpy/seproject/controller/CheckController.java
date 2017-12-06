@@ -34,6 +34,7 @@ public class CheckController {
         String reason = request.getParameter("reason");
         String contact = request.getParameter("contact");
         String checku = "";
+        String tag = null;
         SqlCon c = new SqlCon();
         JSONObject json = new JSONObject();
         // 确认活动是否存在
@@ -45,6 +46,7 @@ public class CheckController {
                 created_ts = res.getTimestamp("created");
                 party = res.getString("party");
                 checku = res.getString("checku");
+                tag = res.getString("tag");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,6 +95,22 @@ public class CheckController {
                 "\")," + "checku = CONCAT(checku, ' ', \"" + username + "\") where aid = \"" + aidStr + "\";";
         c.executeUpdate(upd);
         json.put("feedback", "申请成功！");
+        // 更新interest的权重
+     // interest的权重变化
+        String[] tagLst = tag.split(",");
+        StringBuilder sb = new StringBuilder();
+        sb.append("update sedb.interest set ");
+        for (i = 0; i < tagLst.length; i++)
+        {
+            sb.append(tagLst[i]);
+            sb.append("=");
+            sb.append(tagLst[i]);
+            sb.append("+5");
+            if (i != tagLst.length - 1)
+                sb.append(",");   
+        }
+        sb.append(" where username=\"" + username + "\";");
+        c.executeUpdate(sb.toString());
         out.print(json);
     }
 
