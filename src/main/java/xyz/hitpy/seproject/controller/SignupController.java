@@ -53,6 +53,8 @@ public class SignupController {
         String update = "insert into user (username, password, gender, entryYear, ps) values (\""
         + username + "\", \"" + password + "\", " + gender + ", " + entryYear + ", \"" + ps + "\");";
         sqlCon.executeUpdate(update);
+        update = "insert into sedb.interest (username) values (\"" + username + "\");";
+        sqlCon.executeUpdate(update);
         return "signup_success";
     }
     

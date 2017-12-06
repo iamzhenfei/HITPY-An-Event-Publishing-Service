@@ -23,18 +23,19 @@ public class ActivityController {
     
     @RequestMapping(value = "/postnow", method =  RequestMethod.POST)
     public String addActivity(@RequestParam("eventName") String eventName, @RequestParam("eventLocation") String eventLocation,
-            @RequestParam("eventTime") String eventTime, @RequestParam("content") String content, ModelMap model,
-            HttpServletResponse response,HttpServletRequest request)
+            @RequestParam("eventTime") String eventTime, @RequestParam("content") String content,
+            @RequestParam(value="tag", defaultValue="notag") String[] tag,
+            ModelMap model,HttpServletResponse response,HttpServletRequest request)
     {
-    		try {
-				eventName = new String(eventName.getBytes("ISO-8859-1"),"UTF-8");
-				eventLocation = new String(eventLocation.getBytes("ISO-8859-1"),"UTF-8");
-				eventTime = new String(eventTime.getBytes("ISO-8859-1"),"UTF-8");
-				content = new String(content.getBytes("ISO-8859-1"),"UTF-8");
-			} catch (UnsupportedEncodingException e1) {
-				System.out.println("error at getBytes in addActivity of ActivityController");
-				e1.printStackTrace();
-			}
+		try {
+			eventName = new String(eventName.getBytes("ISO-8859-1"),"UTF-8");
+			eventLocation = new String(eventLocation.getBytes("ISO-8859-1"),"UTF-8");
+			eventTime = new String(eventTime.getBytes("ISO-8859-1"),"UTF-8");
+			content = new String(content.getBytes("ISO-8859-1"),"UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			System.out.println("error at getBytes in addActivity of ActivityController");
+			e1.printStackTrace();
+		}
         String username = (String) request.getSession().getAttribute("username");
         if (username == null || username.equals("")) { return "redirect:login"; }
         SqlCon c = new SqlCon();
@@ -50,9 +51,22 @@ public class ActivityController {
         }
         // 通过cookie验证了
         uid++;  // 用户发帖数加1
-        String upd = "insert into sedb.activity(name, time, location, content, username, uid, checku) values(\"" + eventName +
+        // 处理tag
+        StringBuilder sb = new StringBuilder();
+        if(tag.length >= 1)
+        {
+            for (int i = 0; i < tag.length; i++)
+            {
+                sb.append(tag[i]);
+                if (i != tag.length - 1)
+                    sb.append(",");
+            }
+        }
+        else
+            sb.append("qita");
+        String upd = "insert into sedb.activity(name, time, location, content, username, uid, checku, tag) values(\"" + eventName +
                 "\",\"" + eventTime + "\",\"" + eventLocation + "\", \"" + HtmlCoder.encode(content) + "\", \"" + username +
-                "\"," + uid + ", '');";
+                "\"," + uid + ", '', \"" + sb.toString().replaceFirst("notag", "qita") + "\");";
         c.executeUpdate(upd);
         upd = "update sedb.user set uid = " + uid + " where username = \"" + username + "\";";
         c.executeUpdate(upd);
@@ -69,6 +83,21 @@ public class ActivityController {
             System.out.println("error at 56 of addActivity in ActivityController.java");
         }
         model.addAttribute("aid", aid);
+        
+        // 更新interest
+        sb = new StringBuilder();
+        sb.append("update sedb.interest set ");
+        for (int i = 0; i < tag.length; i++)
+        {
+            sb.append(tag[i]);
+            sb.append("=");
+            sb.append(tag[i]);
+            sb.append("+10");
+            if (i != tag.length - 1)
+                sb.append(","); 
+        }
+        sb.append(" where username=\"" + username + "\";");
+        c.executeUpdate(sb.toString().replaceAll("notag", "qita"));
         return "create_a_success";
     }
     
@@ -77,7 +106,8 @@ public class ActivityController {
     {
         SqlCon c = new SqlCon();
         String eventName = null, eventTime = null, eventLocation = null,
-                content = null, poster = null, partyStr = null;
+                content = null, poster = null, partyStr = null, tag = null;
+        int hit = 0;
         Timestamp created_ts = null;
         ResultSet res = c.executeQuery("select * from sedb.activity where aid=" + aid + " limit 0, 1");
         try {
@@ -89,10 +119,12 @@ public class ActivityController {
                 poster = res.getString("username");
                 created_ts = res.getTimestamp("created");
                 partyStr = res.getString("party");
+                tag = res.getString("tag");
+                hit = res.getInt("hit");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("error at 73 of addActivity in ActivityController.java");
+            System.out.println("error at 97 of addActivity in ActivityController.java");
         }
         if (created_ts == null) { return "404"; }
         String username = (String) request.getSession().getAttribute("username");
@@ -105,6 +137,24 @@ public class ActivityController {
         model.addAttribute("username", username);
         model.addAttribute("party", Arrays.asList((partyStr.split(" "))));
         model.addAttribute("aid", aid);
+        model.addAttribute("hit", hit + 1);
+        // 更新活动的点击量
+        c.executeUpdate("update sedb.activity set hit = " + Integer.toString(hit + 1) + " where aid = " + aid);
+        // interest的权重变化
+        String[] tagLst = tag.split(",");
+        StringBuilder sb = new StringBuilder();
+        sb.append("update sedb.interest set ");
+        for (int i = 0; i < tagLst.length; i++)
+        {
+            sb.append(tagLst[i]);
+            sb.append("=");
+            sb.append(tagLst[i]);
+            sb.append("+1");
+            if (i != tagLst.length - 1)
+                sb.append(",");   
+        }
+        sb.append(" where username=\"" + username + "\";");
+        c.executeUpdate(sb.toString());
         return "show_activity";
     }
     
