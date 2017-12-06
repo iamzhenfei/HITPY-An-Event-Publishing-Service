@@ -33,7 +33,7 @@
 
         var user = "${username}";
 
-        if (user == "") {
+        if (user === "") {
             document.getElementById("login").style.visibility = "visible";
             document.getElementById("sign").style.visibility = "visible";
             document.getElementById("logout").style.visibility = "hidden";

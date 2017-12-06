@@ -100,8 +100,8 @@
         }
 
         #map_canvas {
-            min-width: 700px;
-            min-height: 400px;
+            min-width: 350px;
+            min-height: 200px;
         }
     </style>
 
