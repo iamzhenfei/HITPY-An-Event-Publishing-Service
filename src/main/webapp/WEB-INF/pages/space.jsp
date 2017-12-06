@@ -75,7 +75,7 @@
                     style="float:right">${uid}</span></b></li>
         </ul>
     </div>
-    <h4 style="color: mintcream; padding: 10px 100px 10px">我参加的活动</h4>
+    <h4 style="color: mintcream; padding: 10px 100px 10px">ta参加的活动</h4>
     <div class="bs-docs-example">
         <table class="table">
             <tbody>
@@ -89,7 +89,7 @@
             </tbody>
         </table>
     </div>
-    <h4 style="color: mintcream; padding: 10px 100px 10px">我发布的活动</h4>
+    <h4 style="color: mintcream; padding: 10px 100px 10px">ta发布的活动</h4>
     <div class="bs-docs-example">
         <table class="table">
             <tbody>
@@ -97,9 +97,6 @@
                 <tr>
                     <td>
                         <a href="showActivity?aid=${p.aid}" style="color: mintcream">${p.name}</a>
-                    </td>
-                    <td>
-                        <a href="checkJoiner?aid=${p.aid}&aname=${p.name}" style="color: mintcream">${p.checkNum}</a>
                     </td>
                 </tr>
             </c:forEach>

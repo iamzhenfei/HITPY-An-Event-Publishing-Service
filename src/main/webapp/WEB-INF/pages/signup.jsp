@@ -37,6 +37,16 @@
                 }
             });
         }
+        function checkpass() {
+            var p1 = document.getElementById("password1");
+            var p2 = document.getElementById("password2");
+            if (p1.value === p2.value) {
+                console.log("一样啊");
+            }
+            else {
+                alert("两次密码输入不一致！请修改");
+            }
+        }
     </script>
     <style>
         body {
@@ -53,33 +63,39 @@
 
 <h1 style="width: 125px;font-size: 50px;margin-left: auto;margin-right: auto;color:mintcream">注 册</h1>
 <form action="addUser" method="post">
-    <div style="width: 400px;height: 500px;padding: 10px 50px;
-        margin-top: 50px;margin-left: auto;margin-right: auto;
+    <div style="width: 400px;height: 400px;padding: 10px 50px;
+        margin-top: 20px;margin-left: auto;margin-right: auto;
         border-style: solid;border-width:thin;background: rgba(255,255,255, 0.2);">
 
         <div class="login-fields">
-            <div class="input-group" style="width: 300px;margin: 40px 0px;">
+            <div class="input-group" style="width: 300px;margin: 20px 0px;">
                 <input type="text" id="username" name="username" value=""
                        placeholder="用户名" class="form-control" onblur="checkusername()"/>
             </div>
 
-            <div class="input-group" style="width: 300px;margin: 40px 0px;">
-                <input type="password" id="password" name="password" value=""
+            <div class="input-group" style="width: 300px;margin: 20px 0px;">
+                <input type="password" id="password1" name="password" value=""
                        placeholder="密码" class="form-control"/>
             </div>
-
-            <div class="input-group" style="width: 300px;margin: 40px 0px;">
-                <input type="text" id="gender" name="gender" value=""
-                       placeholder="性别" class="form-control"/>
+            <div class="input-group" style="width: 300px;margin: 20px 0px;">
+                <input type="password" id="password2" name="passwordrep" value=""
+                       placeholder="重复密码" class="form-control" onblur="checkpass()"/>
             </div>
+            <label class="radio-inline">
+                <input type="radio" name="gender" id="gender0" value="0"> <a style="color: #66ccff">男</a>
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" id="gender1" value="1"> <a style="color: #66ccff">女</a>
+            </label>
 
-            <div class="input-group" style="width: 300px;margin: 40px 0px;">
+
+            <div class="input-group" style="width: 300px;margin: 20px 0px;">
                 <input type="text" id="entryYear" name="entryYear" value=""
                        placeholder="入学年份" class="form-control"/>
             </div>
 
-            <div class="input-group" style="width: 300px;margin: 40px 0px;">
-                <input type="text" id="ps" name="ps" value="" placeholder="个人简介"
+            <div class="input-group" style="width: 300px;margin: 20px 0px;">
+                <input type="text" id="ps" name="ps" value="" placeholder="个人简介和联系方式"
                        class="form-control"/>
             </div>
         </div>
