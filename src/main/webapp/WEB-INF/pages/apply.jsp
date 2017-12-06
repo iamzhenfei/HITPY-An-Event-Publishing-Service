@@ -3,24 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="apple-touch-icon"
-          href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png"/>
-    <link rel="shortcut icon"
-          href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico">
-    <link
-            href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css"
-            rel="stylesheet">
-    <link
-            href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css"
-            rel="stylesheet">
-    <link
-            href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css"
-            rel="stylesheet">
-    <link
-            href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
-            rel="stylesheet">
     <script type="text/javascript" src="resources/jquery.js"></script>
-    <script type="text/javascript" src="resources/ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
         function join() {
             var contact = document.getElementById("contact").value;
@@ -38,7 +21,6 @@
     </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>申请啊</title>
-    <link href="resources/bootstrap.min.js"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>

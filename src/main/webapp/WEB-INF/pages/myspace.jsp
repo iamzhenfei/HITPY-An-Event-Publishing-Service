@@ -93,13 +93,24 @@
     <div class="bs-docs-example">
         <table class="table">
             <tbody>
+            <tr>
+                <th style="color: mintcream">
+                    活动名称
+                </th>
+
+                <th style="color: mintcream">
+                    待审核的人数
+                </th>
+            </tr>
+
             <c:forEach items="${myActivitylist}" var="p">
                 <tr>
                     <td>
                         <a href="showActivity?aid=${p.aid}" style="color: mintcream">${p.name}</a>
                     </td>
-                    <td>
-                        <a href="checkJoiner?aid=${p.aid}&aname=${p.name}" style="color: mintcream">${p.checkNum}</a>
+                    <td><span style="color: #0076cb">${p.checkNum}</span>
+                        <a href="checkJoiner?aid=${p.aid}&aname=${p.name}"
+                           style="color: #0076cb; margin-left: 5px">进入审核</a>
                     </td>
                 </tr>
             </c:forEach>
