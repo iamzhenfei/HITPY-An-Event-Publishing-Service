@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
+import xyz.hitpy.seproject.service.TagConvertor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -138,10 +139,12 @@ public class ActivityController {
         model.addAttribute("party", Arrays.asList((partyStr.split(" "))));
         model.addAttribute("aid", aid);
         model.addAttribute("hit", hit + 1);
+        model.addAttribute("tag", TagConvertor.convert(tag).split(","));
         // 更新活动的点击量
         c.executeUpdate("update sedb.activity set hit = " + Integer.toString(hit + 1) + " where aid = " + aid);
         // interest的权重变化
         String[] tagLst = tag.split(",");
+
         StringBuilder sb = new StringBuilder();
         sb.append("update sedb.interest set ");
         for (int i = 0; i < tagLst.length; i++)

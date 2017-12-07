@@ -27,6 +27,13 @@
             background: rgb(0, 0, 0);
         }
 
+        #rightbar {
+            float: right;
+            width: 30%;
+            height: 100%;
+            border: 0 solid #ccc;
+            background: rgb(0, 0, 0);
+        }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${username}的空间</title>
@@ -118,6 +125,11 @@
         </table>
     </div>
 </div>
-
+<div id="rightbar">
+    <div style="float: left; margin-left: 70px;margin-top: 150px">
+        <p style="color: #66ccff">关注：<a href="following">${followingnum}</a></p>
+        <p style="color: #66ccff">粉丝：<a href="follower">${followernum}</a></p>
+    </div>
+</div>
 </body>
 </html>

@@ -49,7 +49,7 @@
     </div>
 </nav>
 <div id="container">
-    <h4 style="color: mintcream; padding: 10px 100px 10px">参加人员列表</h4>
+    <h4 style="color: mintcream; padding: 10px 100px 10px">申请人员列表</h4>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <c:forEach items="${checklist}" var="p">
             <div class="panel panel-default">

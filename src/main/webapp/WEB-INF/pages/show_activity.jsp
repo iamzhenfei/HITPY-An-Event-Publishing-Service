@@ -16,7 +16,7 @@
 
             console.log(user);
 
-            if (user == "") {
+            if (user === "") {
                 document.getElementById("joinbutton").style.visibility = "hidden";
             }
             else {
@@ -140,6 +140,8 @@
     <!-- <br />${aid}  -->
     <br/>
     <h1 style="color: mintcream">${eventName}</h1>
+    <div><c:forEach items="${tag}" var="p"><span class="label label-info">${p}</span></c:forEach></div>
+    <br/> <a style="color: mintcream">点击量：${hit} </a>
     <br/> <a style="color: mintcream">活动时间：${eventTime} </a>
     <br/> <a style="color: mintcream">活动地点：${eventLocation}</a>
     <div id="map_canvas"></div>
@@ -147,7 +149,7 @@
         <br/>
         <a style="color: mintcream;">已参加活动的小伙伴：</a>
         <c:forEach items="${party}" var="p">
-            <a style="color: mintcream;padding:0% 5%">${p}</a> <br/>
+            <a style="color: #66ccff;padding:0% 5%" href="/space?username=${p}">${p}</a> <br/>
         </c:forEach>
     </div>
     <br/>
@@ -156,7 +158,7 @@
         <div style="padding-left: 5%;">${content} </div>
         <br/>
     </div>
-    <br/> <a style="color: mintcream"> 发布人员： ${poster} </a>
+    <br/> <a style="color: #66ccff" href="/space?username=${poster}"> 发布人员： ${poster} </a>
     <br/> <a style="color: mintcream"> 发布时间： ${created}</a>
     <br/>
     <br/>
