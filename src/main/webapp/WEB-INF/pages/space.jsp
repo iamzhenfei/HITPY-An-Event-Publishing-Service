@@ -77,17 +77,17 @@
             document.getElementById("fbtn").innerHTML = "关注";
         }
         function sendfollow() {
-            var f = "${user}";
+            var f = "${ownername}";
             $.ajax({
                 type: "post",
                 url: "follow",
                 dataType: "json",    //data传递的是一个json类型的值，而不是字符串，且必须标明dataType的类型，否则会出现400错误或者其他错误。
                 data: {"fname": f},
                 success: function (data) {
-                    if (data.result === "1") {
+                    if (data.result == 1) {
                         btnunfollow();
                     }
-                    else(data.result === "0")
+                    else if(data.result == 0)
                     {
                         btnfollow();
                     }

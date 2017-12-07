@@ -149,7 +149,7 @@
         <br/>
         <a style="color: mintcream;">已参加活动的小伙伴：</a>
         <c:forEach items="${party}" var="p">
-            <a style="color: #66ccff;padding:0% 5%" href="/space?username=${p}">${p}</a> <br/>
+            <a style="color: #66ccff;padding:0% 5%" href="space?username=${p}">${p}</a> <br/>
         </c:forEach>
     </div>
     <br/>
@@ -158,7 +158,7 @@
         <div style="padding-left: 5%;">${content} </div>
         <br/>
     </div>
-    <br/> <a style="color: #66ccff" href="/space?username=${poster}"> 发布人员： ${poster} </a>
+    <br/> <a style="color: #66ccff" href="space?username=${poster}"> 发布人员： ${poster} </a>
     <br/> <a style="color: mintcream"> 发布时间： ${created}</a>
     <br/>
     <br/>
