@@ -55,6 +55,8 @@ public class SignupController {
         sqlCon.executeUpdate(update);
         update = "insert into sedb.interest (username) values (\"" + username + "\");";
         sqlCon.executeUpdate(update);
+        update = "insert into sedb.relationship (username, following, follower) values (\"" + username + "\", '', '');";
+        sqlCon.executeUpdate(update);
         return "signup_success";
     }
     

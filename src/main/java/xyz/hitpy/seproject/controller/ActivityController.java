@@ -155,6 +155,8 @@ public class ActivityController {
         }
         sb.append(" where username=\"" + username + "\";");
         c.executeUpdate(sb.toString());
+        // 提供关注的人的数量，粉丝数量
+        
         return "show_activity";
     }
     
