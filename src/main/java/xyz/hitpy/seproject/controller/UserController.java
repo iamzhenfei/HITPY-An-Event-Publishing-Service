@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hitpy.seproject.model.ActivityPreview;
 import xyz.hitpy.seproject.model.MyActivityPreview;
 import xyz.hitpy.seproject.mysqlcon.SqlCon;
+import xyz.hitpy.seproject.service.RelationshipService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,6 +93,9 @@ public class UserController {
         model.addAttribute("myActivitylist", myActivities);
         model.addAttribute("gender", gender);
         model.addAttribute("uid", uid);
+        int[] fnums = RelationshipService.getFollowNum(username);
+        model.addAttribute("followingnum", fnums[0]);
+        model.addAttribute("followernum", fnums[1]);
         return "myspace";
     }
 
@@ -169,6 +173,9 @@ public class UserController {
         model.addAttribute("myActivitylist", myActivities);
         model.addAttribute("gender", gender);
         model.addAttribute("uid", uid);
+        int[] fnums = RelationshipService.getFollowNum(username);
+        model.addAttribute("followingnum", fnums[0]);
+        model.addAttribute("followernum", fnums[1]);
         return "space";
     }
 }

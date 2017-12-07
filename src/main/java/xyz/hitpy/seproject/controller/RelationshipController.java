@@ -85,7 +85,6 @@ public class RelationshipController {
             return;
         }
         // 判断username是否已经关注了fname
-        json.put("result", "0");
         i = following.indexOf(fname);
         StringBuilder sb = new StringBuilder();
         if (i == -1)
@@ -98,7 +97,6 @@ public class RelationshipController {
             sb.append("\", followingnum=followingnum + 1 where username=\"");
             sb.append(username);
             sb.append("\" limit 1;");
-            System.out.println("follow里sb的内容0:" + sb.toString());
             c.executeUpdate(sb.toString());
             // 在fname的follower里添加username，follower加1
             sb = new StringBuilder();
@@ -107,9 +105,8 @@ public class RelationshipController {
             sb.append("\"), followernum=followernum + 1 where username=\"");
             sb.append(fname);
             sb.append("\" limit 1;");
-            System.out.println("follow里sb的内容1:" + sb.toString());
             c.executeUpdate(sb.toString());
-            json.put("result", "1");
+            json.put("result", 1);
         }
         else
         {
@@ -120,7 +117,6 @@ public class RelationshipController {
             sb.append("\", followingnum=followingnum - 1 where username=\"");
             sb.append(username);
             sb.append("\" limit 1;");
-            System.out.println("follow里sb的内容2:" + sb.toString());
             c.executeUpdate(sb.toString());
             // 在fname的follower里删除username， followernum减1
             String follower = null;
@@ -142,9 +138,9 @@ public class RelationshipController {
                 sb.append("\", followernum=followernum - 1 where username=\"");
                 sb.append(fname);
                 sb.append("\" limit 1;");
-                System.out.println("follow里sb的内容3:" + sb.toString());
                 c.executeUpdate(sb.toString());
             }
+            json.put("result", 0);
         }
         out.print(json);
     }
