@@ -126,7 +126,7 @@
     </div>
 </div>
 <div id="rightbar">
-    <div style="float: left; margin-left: 70px;margin-top: 150px">
+    <div style="float: left; margin-left: 70px;">
         <p style="color: #66ccff">关注：<a href="following">${followingnum}</a></p>
         <p style="color: #66ccff">粉丝：<a href="follower">${followernum}</a></p>
     </div>

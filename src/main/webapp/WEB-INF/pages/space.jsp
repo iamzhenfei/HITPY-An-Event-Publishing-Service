@@ -87,7 +87,7 @@
                     if (data.result === "1") {
                         btnunfollow();
                     }
-                    else(data.result === "0")
+                    else if (data.result === "0")
                     {
                         btnfollow();
                     }
