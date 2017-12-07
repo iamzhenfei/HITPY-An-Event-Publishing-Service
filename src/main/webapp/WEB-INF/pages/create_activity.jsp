@@ -4,8 +4,19 @@
 <html>
 <head>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-CN.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css"/>
+    <script>
+        $(function () {
+            $("#eventTime").datetimepicker();
+        });
+    </script>
     <link
             href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
             rel="stylesheet">
@@ -21,6 +32,22 @@
         window.onload = function () {
             CKEDITOR.replace('editor1');
         };
+    </script>
+    <script>
+        function bar() {
+            if ("${username}" === "") {
+                document.getElementById("login").style.visibility = "visible";
+                document.getElementById("sign").style.visibility = "visible";
+                document.getElementById("logout").style.visibility = "hidden";
+                document.getElementById("username").style.visibility = "hidden";
+            }
+            else {
+                document.getElementById("login").style.visibility = "hidden";
+                document.getElementById("sign").style.visibility = "hidden";
+                document.getElementById("logout").style.visibility = "visible";
+                document.getElementById("username").style.visibility = "visible";
+            }
+        }
     </script>
 
     <script id="editor" type="text/plain">
@@ -40,16 +67,25 @@
         }
     </style>
 </head>
-<body>
+<body onload="bar()">
 
 <nav class="navbar navbar-inverse" role="navigation">
     <div class="navbar-header">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index">HIT_PY</a>
+                <ul class="nav navbar-nav navbar-right" id="login">
+                    <li class="navbar-right"><a href="login">登录</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="sign">
+                    <li class="navbar-right"><a href="signup">注册</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right" id="username">
                     <li class="navbar-right"><a style="text-align: center"
                                                 href="myspace"> ${username} </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="logout">
+                    <li class="navbar-right"><a href="logout">退出</a></li>
                 </ul>
             </div>
         </div>
@@ -65,7 +101,7 @@
             <input type="checkbox" name="tag" autocomplete="off" value="xuexi"> 学习
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" name="tag" autocomplete="off" value="qinggai"> 情感
+            <input type="checkbox" name="tag" autocomplete="off" value="qinggan"> 情感
         </label>
         <label class="btn btn-default">
             <input type="checkbox" name="tag" autocomplete="off" value="youxi"> 游戏

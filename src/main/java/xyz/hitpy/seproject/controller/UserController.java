@@ -97,8 +97,14 @@ public class UserController {
 
     @RequestMapping("space")
     public String showProfile(@RequestParam("username") String username, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        String user;
         if (username == null) {
             return "404";
+        } else {
+            user = (String) request.getSession().getAttribute("username");
+            if (username.equals(user)) {
+                return "redirect:myspace";
+            }
         }
         String entryYear = null, ps = null, activity = null;
         int gender = 0, uid = 0;
@@ -155,8 +161,8 @@ public class UserController {
             System.out.println("error at 80 in showProfile of userController");
             e.printStackTrace();
         }
-
-        model.addAttribute("username", username);
+        model.addAttribute("user", user);
+        model.addAttribute("ownername", username);
         model.addAttribute("entryYear", entryYear);
         model.addAttribute("ps", ps);
         model.addAttribute("activitylist", activities);

@@ -35,7 +35,6 @@
 
         var user = "${username}";
 
-        console.log(user);
 
         if (user == "") {
             document.getElementById("login").style.visibility = "visible";

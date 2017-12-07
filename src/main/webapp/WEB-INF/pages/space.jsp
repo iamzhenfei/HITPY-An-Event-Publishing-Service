@@ -21,12 +21,20 @@
         }
 
         #container {
+            float: left;
             width: 70%;
             height: 100%;
-            border: 0px solid #ccc;
+            border: 0 solid #ccc;
             background: rgb(0, 0, 0);
         }
 
+        #rightbar {
+            float: right;
+            width: 30%;
+            height: 100%;
+            border: 0 solid #ccc;
+            background: rgb(0, 0, 0);
+        }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${username}的空间</title>
@@ -38,7 +46,56 @@
             else {
                 document.getElementById("sex").innerHTML = "女";
             }
-
+            if ("${user}" === "") {
+                document.getElementById("fbtn").style.visibility = "hidden";
+                document.getElementById("login").style.visibility = "visible";
+                document.getElementById("sign").style.visibility = "visible";
+                document.getElementById("logout").style.visibility = "hidden";
+                document.getElementById("username").style.visibility = "hidden";
+            }
+            else {
+                document.getElementById("login").style.visibility = "hidden";
+                document.getElementById("sign").style.visibility = "hidden";
+                document.getElementById("logout").style.visibility = "visible";
+                document.getElementById("username").style.visibility = "visible";
+                document.getElementById("fbtn").style.visibility = "visible";
+                if ("${iffollow}" === "1") {
+                    btnunfollow()
+                }
+                else("${iffollow}" === "0")
+                {
+                    btnfollow()
+                }
+            }
+        }
+        function btnunfollow() {
+            document.getElementById("fbtn").setAttribute("class", "btn btn-danger btn-lg");
+            document.getElementById("fbtn").innerHTML = "取消关注";
+        }
+        function btnfollow() {
+            document.getElementById("fbtn").setAttribute("class", "btn btn-primary btn-lg");
+            document.getElementById("fbtn").innerHTML = "关注";
+        }
+        function sendfollow() {
+            var f = "${user}";
+            $.ajax({
+                type: "post",
+                url: "follow",
+                dataType: "json",    //data传递的是一个json类型的值，而不是字符串，且必须标明dataType的类型，否则会出现400错误或者其他错误。
+                data: {"fname": f},
+                success: function (data) {
+                    if (data.result === "1") {
+                        btnunfollow();
+                    }
+                    else(data.result === "0")
+                    {
+                        btnfollow();
+                    }
+                },
+                error: function () {
+                    alert("网络错误");
+                }
+            });
         }
     </script>
     <script src="resources/jquery.js"></script>
@@ -52,6 +109,16 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index">HIT_PY</a>
+                <ul class="nav navbar-nav navbar-right" id="login">
+                    <li class="navbar-right"><a href="login">登录</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="sign">
+                    <li class="navbar-right"><a href="signup">注册</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="username">
+                    <li class="navbar-right"><a style="text-align: center"
+                                                href="myspace"> ${username} </a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right" id="logout">
                     <li class="navbar-right"><a href="logout">退出</a></li>
                 </ul>
@@ -60,11 +127,18 @@
     </div>
 </nav>
 <div id="container">
-    <h1 style="color: mintcream; padding: 10px 100px 10px">${username}的空间</h1>
+    <div><h1 style="color: mintcream; padding: 10px 100px 10px">${ownername}的空间</h1></div>
+    <div style="margin-right: 5%;float: right">
+        <button class="bt btn-primary btn-lg" id="fbtn" onclick="sendfollow()">
+            关注
+        </button>
+    </div>
+    <div style="margin-top: 70px">
     <blockquote class="blockquote-reverse">
         <p style="color: mintcream">${ps}</p>
-        <footer style="color: mintcream">${username}</footer>
+        <footer style="color: mintcream">${ownername}</footer>
     </blockquote>
+    </div>
     <div id="c2" style="width: 85%;margin-left: 7.5%; ">
         <ul class="list-group">
             <li class="list-group-item"><b><span class="label label-default">入学年份</span> <span
@@ -104,6 +178,11 @@
         </table>
     </div>
 </div>
-
+<div id="rightbar">
+    <div style="float: left; margin-left: 70px;margin-top: 150px">
+        <p style="color: #66ccff">关注：${followingnum}</p>
+        <p style="color: #66ccff">粉丝：${followernum}</p>
+    </div>
+</div>
 </body>
 </html>
