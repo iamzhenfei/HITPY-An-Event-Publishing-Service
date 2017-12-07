@@ -22,7 +22,7 @@ public class IndexController {
 		model.addAttribute("username", username);
 		ArrayList<ActivityPreview> activities = new ArrayList<ActivityPreview>();
 		SqlCon con = new SqlCon();
-		String query = "SELECT * FROM sedb.activity";
+		String query = "SELECT * FROM sedb.activity order by aid desc limit 0, 20;";
 		ResultSet res = con.executeQuery(query);
 		try {
 			while (res.next()) {
